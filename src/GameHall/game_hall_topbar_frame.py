@@ -17,7 +17,6 @@ except AttributeError:
 
 
 class GameHallTopBar(QFrame):
-
     def __init__(self, parent=None):
         QFrame.__init__(self, parent)
         self.parent = parent
@@ -28,10 +27,10 @@ class GameHallTopBar(QFrame):
         ''')
         self.isDraging = False
         self.setGeometry(0, 7, 800, 60)
-        self.addRobotLogo(parent)
-        self.addButtons(self)
+        self.__addRobotLogo(parent)
+        self.__addButtons(self)
 
-    def addRobotLogo(self, parent):
+    def __addRobotLogo(self, parent):
         btn = QPushButton(parent)
         btn.setObjectName("btnSpecial")
         btn.setStyleSheet(
@@ -51,11 +50,11 @@ class GameHallTopBar(QFrame):
             ''')
         btn.setGeometry(20, 0, 67, 60)
 
-    def addButtons(self, parent):
+    def __addButtons(self, parent):
         closeButton = PushButton(parent)
         closeButton.loadPixmap('res/close.png')
         closeButton.setGeometry(770, 10, 16, 16)
-        closeButton.clicked.connect(self.parent.close)
+        closeButton.clicked.connect(self.parent.closeWindow)
 
         miniButton = PushButton(parent)
         miniButton.loadPixmap('res/mini.png')
