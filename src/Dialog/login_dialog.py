@@ -21,6 +21,7 @@ class LoginDialog(QDialog):
         desktopSize = QApplication.desktop().size()
         self.setStyleSheet("background-color: white")
         self.setWindowFlags(Qt.Window | Qt.WindowCloseButtonHint)
+        self.canClose = False
         self.setWindowTitle(title)
         self.setMaximumSize(400, 300)
         self.setMinimumSize(400, 300)
@@ -92,4 +93,6 @@ class LoginDialog(QDialog):
                   self.userEdit.text())
 
     def closeEvent(self, event):
-        self.emit(SIGNAL("close"))
+        if not self.canClose:
+            self.emit(SIGNAL("close"))
+            event.ignore()

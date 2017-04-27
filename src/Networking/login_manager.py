@@ -38,7 +38,8 @@ class LoginManager(QObject):
         if [False for key in allKeys if key not in response.keys()]:
             logging.debug('login resp key error')
             return
-        self.currentUser = response['user']
+        if response['result']:
+            self.currentUser = response['user']
         self.emit(SIGNAL("loginCallback(QString)"), data)
 
     def logout(self):

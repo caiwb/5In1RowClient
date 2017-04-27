@@ -57,14 +57,8 @@ class GameHallMainWindow(QWidget):
         self.resultDailog = QMessageBox(self)
 
     def loginDialogClose(self):
-        if not self.loginManager.isLogin:
-            self.loginDialog = login_dialog.LoginDialog(self)
-            self.connect(self.loginDialog, SIGNAL("close"),
-                         self.loginDialogClose)
-            self.connect(self.loginDialog, SIGNAL("login(QString,int,QString)"),
-                         self.login)
-            self.loginDialog.open()
-        else:
+        if self.loginManager.isLogin:
+            self.loginDialog.canClose = True
             self.loginDialog.close()
 
     def login(self, ip, port, user):
@@ -117,9 +111,5 @@ class GameHallMainWindow(QWidget):
             self.loginDialogClose()
 
     def closeWindow(self):
-        # if self.client:
-        #     self.client.close()
         self.loginDialog.done(1)
         self.close()
-
-
