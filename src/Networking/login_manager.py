@@ -2,6 +2,7 @@
 
 from PyQt4.QtCore import *
 import json, logging
+from user_model import UserModel
 
 try:
     _fromUtf8 = QString.fromUtf8
@@ -21,11 +22,12 @@ class LoginManager(QObject):
         QObject.__init__(self)
         self.client = client
         self.currentUser = None
+        self.isLogin
 
-    def login(self, user):
+    def login(self, account):
         reqData = {'sid': 0,
                    'cid': 0,
-                   'user': user}
+                   'account': account}
         jsonReq = json.dumps(reqData)
         logging.debug('login send' + jsonReq)
 
@@ -39,7 +41,9 @@ class LoginManager(QObject):
             logging.debug('login resp key error')
             return
         if response['result']:
-            self.currentUser = response['user']
+            userDict = response['user']
+            self.currentUser = UserModel(userDict)
+
         self.emit(SIGNAL("loginCallback(QString)"), data)
 
     def logout(self):

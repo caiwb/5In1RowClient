@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/GameHall" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Networking" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Dialog" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Model" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

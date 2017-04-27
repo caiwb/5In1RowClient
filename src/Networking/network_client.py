@@ -8,7 +8,7 @@ import json
 
 class TcpClient(netstream.netstream):
     def __init__(self):
-        netstream.netstream.__init__(self, 8)
+        netstream.netstream.__init__(self)
         self.isConnnecting = False
         self.shutdown = False
         self.callbacksDict = {}

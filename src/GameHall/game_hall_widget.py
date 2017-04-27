@@ -3,10 +3,10 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import logging, json
+import logging, json, time
 import game_hall_topbar_frame
 import game_hall_main_frame
-import game_hall_manager
+import game_room_manager
 import login_dialog
 import login_manager
 import network_client
@@ -31,7 +31,7 @@ class GameHallMainWindow(QWidget):
         # network manager
         self.client = network_client.TcpClient()
         self.loginManager = login_manager.LoginManager(self.client)
-        self.gameHallManager = game_hall_manager.GameHallManager(self.client)
+        self.gameRoomManager = game_room_manager.GameRoomManager(self.client)
         self.connect(self.loginManager, SIGNAL("loginCallback(QString)"),
                      self.loginCallback)
 
@@ -60,6 +60,9 @@ class GameHallMainWindow(QWidget):
         if self.loginManager.isLogin:
             self.loginDialog.canClose = True
             self.loginDialog.close()
+            self.gameRoomManager.createRoom()
+            time.sleep(2)
+            self.gameRoomManager.createRoom()
 
     def login(self, ip, port, user):
         if isinstance(user, QString):
@@ -92,6 +95,9 @@ class GameHallMainWindow(QWidget):
         suc = response['result']
         reason = response['reason']
         code = response['code']
+        user = response['user']
+
+        self.gameRoomManager.user = self.loginManager.currentUser
 
         logging.debug(reason)
         if suc:
@@ -106,8 +112,9 @@ class GameHallMainWindow(QWidget):
     def loginComplete(self, title, reason):
         logging.debug(reason)
         self.loginDialog.hideLoading()
-        ret = self.resultDailog.information(None, title, reason, QMessageBox.Ok)
-        if ret == QMessageBox.Ok:
+        ret = self.resultDailog.information(None, title, reason,
+                                            u'确定')
+        if ret == 0:
             self.loginDialogClose()
 
     def closeWindow(self):
