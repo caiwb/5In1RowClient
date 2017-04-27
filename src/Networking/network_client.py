@@ -13,6 +13,7 @@ class TcpClient(netstream.netstream):
         self.shutdown = False
         self.callbacksDict = {}
         self.loopThread = threading.Thread(target=self.processing)
+        self.loopThread.setDaemon(True)
 
     def connect(self, address='127.0.0.1', port=7890,
                 head=-1, block=False, timeout=0):
@@ -32,14 +33,14 @@ class TcpClient(netstream.netstream):
                 while True:
                     data = self.recv()
                     if data:
-                        logging.debug(data)
+                        logging.debug('recv' + data)
                         response = json.loads(data)
                         if response.has_key('sid') and response.has_key('cid'):
                             sid = response['sid']
                             cid = response['cid']
                             callbackKey = '%d_%d' % (sid, cid)
                             callback = self.callbacksDict[callbackKey]
-                            callback(response)
+                            callback(response, data)
 
             elif self.status() == netstream.NET_STATE_STOP:
                 break

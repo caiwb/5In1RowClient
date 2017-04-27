@@ -3,7 +3,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import logging
+import logging, json
 import game_hall_topbar_frame
 import game_hall_main_frame
 import game_hall_manager
@@ -32,6 +32,8 @@ class GameHallMainWindow(QWidget):
         self.client = network_client.TcpClient()
         self.loginManager = login_manager.LoginManager(self.client)
         self.gameHallManager = game_hall_manager.GameHallManager(self.client)
+        self.connect(self.loginManager, SIGNAL("loginCallback(QString)"),
+                     self.loginCallback)
 
         # data source
         self.tableList = []
@@ -44,12 +46,15 @@ class GameHallMainWindow(QWidget):
         self.topbarFrame = game_hall_topbar_frame.GameHallTopBar(self)
         self.mainFrame = game_hall_main_frame.GameHallMain(self)
 
+        #dialog
         self.loginDialog = login_dialog.LoginDialog(self)
         self.connect(self.loginDialog, SIGNAL("close"),
                      self.loginDialogClose)
         self.connect(self.loginDialog, SIGNAL("login(QString,int,QString)"),
                      self.login)
         self.loginDialog.open()
+
+        self.resultDailog = QMessageBox(self)
 
     def loginDialogClose(self):
         if not self.loginManager.isLogin:
@@ -59,6 +64,8 @@ class GameHallMainWindow(QWidget):
             self.connect(self.loginDialog, SIGNAL("login(QString,int,QString)"),
                          self.login)
             self.loginDialog.open()
+        else:
+            self.loginDialog.close()
 
     def login(self, ip, port, user):
         if isinstance(user, QString):
@@ -70,41 +77,44 @@ class GameHallMainWindow(QWidget):
             else:
                 suc = 0
             if suc == 0:
-                self.loginManager.login(user, self.loginComplete)
+                self.loginManager.login(user)
             else:
                 raise Exception('connect failed')
         except Exception as e:
             logging.debug(e.message)
+            self.loginComplete(u'登录失败', u'服务器连接失败，'
+                                            u'请检查地址和端口号是否错误')
 
-            errDailog = QMessageBox(self)
-            errDailog.warning(None, u'登录失败',
-                              u'服务器连接失败，请检查地址和端口号是否错误',
-                              u'确定')
-            errDailog.buttonClicked.connect(self.loginDialogClose)
-
-            self.loginDialog.hideLoading()
-
-    def loginComplete(self, response):
-        if not isinstance(response, dict):
-            suc = False
-            reason = u'登录失败，请重新登录'
+    def loginCallback(self, data):
+        if isinstance(data, QString):
+            data = _toUtf8(data).data()
+        try:
+            response = json.loads(data)
+        except:
+            logging.debug('data is not a json string')
+            self.loginComplete(u'登录失败', u'服务器连接失败，'
+                                            u'请检查地址和端口号是否错误')
             return
-        elif response.has_key('result') and response.has_key('reason'):
-            suc = response['result']
-            reason = response['reason']
+        suc = response['result']
+        reason = response['reason']
+        code = response['code']
 
-        self.loginDialog.hideLoading()
+        logging.debug(reason)
         if suc:
-            sucDailog = QMessageBox(self)
-            sucDailog.information(None, u'登录成功',
-                                  u'登录成功，尽情享受游戏的乐趣吧',
-                                  u'确定')
-            sucDailog.buttonClicked.connect(self.loginDialogClose)
+            title = u'登录成功'
+            reason = u'登录成功，请尽情享受对战的乐趣吧~'
         else:
-            logging.debug(reason)
-            errDailog = QMessageBox(self)
-            errDailog.warning(None, u'登录失败', reason, u'确定')
-            errDailog.buttonClicked.connect(self.loginDialogClose)
+            title = u'登录失败'
+            reason = u'该账号已登录，请更换账号' if code == 1001 \
+                else u'服务器连接失败，请检查地址和端口号是否错误'
+        self.loginComplete(title, reason)
+
+    def loginComplete(self, title, reason):
+        logging.debug(reason)
+        self.resultDailog = QMessageBox(self)
+        self.resultDailog.information(None, title, reason, u'确定')
+        self.resultDailog.buttonClicked.connect(self.loginDialogClose)
+        self.loginDialog.hideLoading()
 
     def closeWindow(self):
         # if self.client:
