@@ -89,8 +89,8 @@ class PushButton(QPushButton):
             self.status = 0
             self.update()
 
-    def setDisabled(self, bool):
-        super(PushButton, self).setDisabled(bool)
+    def setDisabled(self, disable):
+        super(PushButton, self).setDisabled(disable)
         if not self.isEnabled():
             self.status = 2
             self.update()

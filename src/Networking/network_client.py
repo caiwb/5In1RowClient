@@ -8,7 +8,7 @@ import json
 
 class TcpClient(netstream.netstream):
     def __init__(self):
-        netstream.netstream.__init__(self)
+        netstream.netstream.__init__(self, 8)
         self.isConnnecting = False
         self.shutdown = False
         self.callbacksDict = {}
@@ -27,7 +27,7 @@ class TcpClient(netstream.netstream):
 
     def processing(self):
         while not self.shutdown:
-            time.sleep(0.05)
+            time.sleep(0.1)
             self.process()
             if self.status() == netstream.NET_STATE_ESTABLISHED:
                 while True:

@@ -111,13 +111,15 @@ class GameHallMainWindow(QWidget):
 
     def loginComplete(self, title, reason):
         logging.debug(reason)
-        self.resultDailog = QMessageBox(self)
-        self.resultDailog.information(None, title, reason, u'确定')
-        self.resultDailog.buttonClicked.connect(self.loginDialogClose)
         self.loginDialog.hideLoading()
+        ret = self.resultDailog.information(None, title, reason, QMessageBox.Ok)
+        if ret == QMessageBox.Ok:
+            self.loginDialogClose()
 
     def closeWindow(self):
         # if self.client:
         #     self.client.close()
         self.loginDialog.done(1)
         self.close()
+
+
