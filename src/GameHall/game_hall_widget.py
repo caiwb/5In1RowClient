@@ -30,8 +30,8 @@ class GameHallMainWindow(QWidget):
 
         # network manager
         self.client = network_client.TcpClient()
-        self.loginManager = login_manager.LoginManager(self.client)
-        self.gameRoomManager = game_room_manager.GameRoomManager(self.client)
+        self.loginManager = login_manager.LoginManager()
+        self.gameRoomManager = game_room_manager.GameRoomManager()
         self.connect(self.loginManager, SIGNAL("loginCallback(QString)"),
                      self.loginCallback)
 
@@ -60,9 +60,9 @@ class GameHallMainWindow(QWidget):
         if self.loginManager.isLogin:
             self.loginDialog.canClose = True
             self.loginDialog.close()
-            self.gameRoomManager.createRoom()
-            time.sleep(2)
-            self.gameRoomManager.createRoom()
+            # self.gameRoomManager.createRoom()
+            # time.sleep(2)
+            # self.gameRoomManager.createRoom()
 
     def login(self, ip, port, user):
         if isinstance(user, QString):

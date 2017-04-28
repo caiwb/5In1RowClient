@@ -3,11 +3,23 @@
 from network_client import TcpClient
 from PyQt4.QtCore import *
 import json, logging
+import network_client
 
+def singleton(cls, *args, **kw):
+    instances = {}
+
+    def _singleton():
+        if cls not in instances:
+            instances[cls] = cls(*args, **kw)
+        return instances[cls]
+
+    return _singleton
+
+@singleton
 class GameRoomManager(QObject):
-    def __init__(self, client):
+    def __init__(self):
         QObject.__init__(self)
-        self.client = client
+        self.client = network_client.TcpClient()
         self.user = None
         self.rooms = []
 

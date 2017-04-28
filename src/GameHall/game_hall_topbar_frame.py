@@ -3,19 +3,6 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-try:
-    _fromUtf8 = QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _toUtf8 = QString.toUtf8
-except AttributeError:
-    def _toUtf8(s):
-        return s
-
-
 class GameHallTopBar(QFrame):
     def __init__(self, parent=None):
         QFrame.__init__(self, parent)

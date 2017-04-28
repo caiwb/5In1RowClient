@@ -2,25 +2,24 @@
 
 from PyQt4.QtCore import *
 import json, logging
+import network_client
 from user_model import UserModel
 
-try:
-    _fromUtf8 = QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
+def singleton(cls, *args, **kw):
+    instances = {}
 
-try:
-    _toUtf8 = QString.toUtf8
-except AttributeError:
-    def _toUtf8(s):
-        return s
+    def _singleton():
+        if cls not in instances:
+            instances[cls] = cls(*args, **kw)
+        return instances[cls]
 
+    return _singleton
 
+@singleton
 class LoginManager(QObject):
-    def __init__(self, client):
+    def __init__(self):
         QObject.__init__(self)
-        self.client = client
+        self.client = network_client.TcpClient()
         self.currentUser = None
         self.isLogin
 

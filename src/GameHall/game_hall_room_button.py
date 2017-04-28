@@ -4,30 +4,22 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import copy
 
-try:
-    _fromUtf8 = QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _toUtf8 = QString.toUtf8
-except AttributeError:
-    def _toUtf8(s):
-        return s
-
 class GameHallRoomButton(QPushButton):
     def __init__(self, parent=None):
         QPushButton.__init__(self, parent)
-        # self.setStyleSheet(
-        # '''
-        # GameHallRoomButton{
-        # border-style:solid;
-        # border-top-left-radius:2px;
-        # }
-        # ''')
+        self.setObjectName("btnSpecial")
+        self.setStyleSheet(
+        '''
+        GameHallRoomButton#btnSpecial {
+        border-image: url(res/btn_bg.png);
+        background-repeat: no-repeat;
+        }
+        GameHallRoomButton#btnSpecial:pressed {
+        border-image: url(res/btn_pressed_bg.png);
+        background-repeat: no-repeat;
+        }
+        ''')
         rect = self.rect()
-
 
         self.userLbl1 = QLabel(self)
         self.userLbl1.setStyleSheet(
