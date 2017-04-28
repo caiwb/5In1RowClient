@@ -69,6 +69,7 @@ class GameRoomManager(QObject):
             logging.warning('room list key error')
             return
         if response['result']:
+            self.rooms = []
             roomsDict = response['rooms']
             for roomDict in roomsDict:
                 room = RoomModel(roomDict)
