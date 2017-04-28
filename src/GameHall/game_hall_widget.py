@@ -32,7 +32,7 @@ class GameHallMainWindow(QWidget):
         self.client = network_client.TcpClient()
         self.loginManager = login_manager.LoginManager()
         self.gameRoomManager = game_room_manager.GameRoomManager()
-        self.connect(self.loginManager, SIGNAL("loginCallback(QString)"),
+        self.connect(self.loginManager, SIGNAL("loginCallback(int, int)"),
                      self.loginCallback)
 
         # data source
@@ -82,24 +82,7 @@ class GameHallMainWindow(QWidget):
             self.loginComplete(u'登录失败', u'服务器连接失败，'
                                             u'请检查地址和端口号是否错误')
 
-    def loginCallback(self, data):
-        if isinstance(data, QString):
-            data = _toUtf8(data).data()
-        try:
-            response = json.loads(data)
-        except:
-            logging.debug('data is not a json string')
-            self.loginComplete(u'登录失败', u'服务器连接失败，'
-                                            u'请检查地址和端口号是否错误')
-            return
-        suc = response['result']
-        reason = response['reason']
-        code = response['code']
-        user = response['user']
-
-        self.gameRoomManager.user = self.loginManager.currentUser
-
-        logging.debug(reason)
+    def loginCallback(self, suc, code):
         if suc:
             title = u'登录成功'
             reason = u'登录成功，请尽情享受对战的乐趣吧~'

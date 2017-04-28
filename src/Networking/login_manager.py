@@ -28,11 +28,11 @@ class LoginManager(QObject):
                    'cid': 0,
                    'account': account}
         jsonReq = json.dumps(reqData)
-        logging.debug('login send' + jsonReq)
 
         callbackKey = '0_0'
         self.client.callbacksDict[callbackKey] = self.loginCallback
         self.client.send(jsonReq)
+        logging.debug('login send' + jsonReq)
 
     def loginCallback(self, response, data):
         allKeys = ['user', 'result', 'code', 'reason']
@@ -43,7 +43,8 @@ class LoginManager(QObject):
             userDict = response['user']
             self.currentUser = UserModel(userDict)
 
-        self.emit(SIGNAL("loginCallback(QString)"), data)
+        self.emit(SIGNAL("loginCallback(int, int)"),
+                  response['result'], response['code'])
 
     def logout(self):
         pass
