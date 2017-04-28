@@ -26,6 +26,7 @@ class GameRoomManager(QObject):
         self.room = None
         self.registRoomListCallBack()
 
+    # 创建房间
     def createRoom(self):
         if not LoginManager().isLogin:
             return
@@ -39,14 +40,16 @@ class GameRoomManager(QObject):
         self.client.send(jsonReq)
         logging.debug('create room send' + jsonReq)
 
+    # 创建房间回调
     def createRoomCallback(self, response, data):
-        allKeys = ['rid', 'result', 'code', 'rooms']
+        allKeys = ['rid', 'result', 'code']
         if [False for key in allKeys if key not in response.keys()]:
-            logging.debug('create room resp key error')
+            logging.warning('create room resp key error')
             return
         if response['result']:
             logging.debug('create room suc')
 
+    # 请求房间列表
     def requestRoomList(self):
         reqData = {'sid': 1,
                    'cid': 1}
@@ -54,14 +57,16 @@ class GameRoomManager(QObject):
         self.client.send(jsonReq)
         logging.debug('request room list send' + jsonReq)
 
+    # 注册房间列表广播回调
     def registRoomListCallBack(self):
         callbackKey = '1_1'
         self.client.callbacksDict[callbackKey] = self.roomListCallback
 
+    # 房间列表回调
     def roomListCallback(self, response, data):
         allKeys = ['result', 'code', 'rooms']
         if [False for key in allKeys if key not in response.keys()]:
-            logging.debug('room list key error')
+            logging.warning('room list key error')
             return
         if response['result']:
             roomsDict = response['rooms']
@@ -69,3 +74,19 @@ class GameRoomManager(QObject):
                 room = RoomModel(roomDict)
                 self.rooms.append(room)
         self.emit(SIGNAL("refreshRoom"))
+
+    # 进入房间
+    def enterRoom(self):
+        pass
+
+    # 进入房间回调
+    def enterRoomCallback(self):
+        pass
+
+    # 退出房间
+    def leaveRoom(self):
+        pass
+
+    # 退出房间回调
+    def leaveRoomCallback(self):
+        pass

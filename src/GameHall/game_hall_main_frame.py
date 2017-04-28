@@ -18,4 +18,4 @@ class GameHallMain(QFrame):
         self.setGeometry(0, 67, 800, 533)
 
         self.roomGird = game_hall_room_gird.GameHallRoomGird(self)
-        self.roomGird.setGeometry(40, 40, 520, 450)
+        self.roomGird.setGeometry(40, 40, 550, 450)

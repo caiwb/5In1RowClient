@@ -14,11 +14,11 @@ class GameHallRoomGird(QFrame):
 
         self.setStyleSheet("background-color: rgba(0, 0, 0, 0)")
         self.scrollFrame = QFrame(self)
-        self.scrollFrame.setGeometry(0, 0, 600, 533)
+        self.scrollFrame.setGeometry(0, 0, 550, 450)
 
         self.scrollArea = QScrollArea(self)
         self.scrollArea.setFrameShape(QFrame.NoFrame)
-        self.scrollArea.setGeometry(0, 0, 520, 450)
+        self.scrollArea.setGeometry(0, 0, 550, 450)
         self.scrollArea.setSizePolicy(QSizePolicy(QSizePolicy.Expanding,
                                                   QSizePolicy.Expanding))
         self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -70,6 +70,9 @@ class GameHallRoomGird(QFrame):
         for idx, btn in enumerate(self.btns):
             self.gLayout.removeWidget(btn)
             btn.deleteLater()
+        self.gLayout.update()
+
+        self.btns = []
 
         for i in range(1 + len(GameRoomManager().rooms)):
             if not i:

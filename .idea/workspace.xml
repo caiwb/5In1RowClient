@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a68d8e5-932e-4ff6-933a-679ac8907518" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/5In1RowClient.iml" afterPath="$PROJECT_DIR$/.idea/5In1RowClient.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/launcher.py" afterPath="$PROJECT_DIR$/launcher.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameHall/game_hall_widget.py" afterPath="$PROJECT_DIR$/src/GameHall/game_hall_widget.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameHall/game_hall_main_frame.py" afterPath="$PROJECT_DIR$/src/GameHall/game_hall_main_frame.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameHall/game_hall_room_gird.py" afterPath="$PROJECT_DIR$/src/GameHall/game_hall_room_gird.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Networking/game_room_manager.py" afterPath="$PROJECT_DIR$/src/Networking/game_room_manager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Networking/login_manager.py" afterPath="$PROJECT_DIR$/src/Networking/login_manager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Networking/network_client.py" afterPath="$PROJECT_DIR$/src/Networking/network_client.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +16,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/5In1RowClient$service.coverage" NAME="service Coverage Results" MODIFIED="1493193162476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../5In1RowService/src" />
-    <SUITE FILE_PATH="coverage/5In1RowClient$launcher.coverage" NAME="launcher Coverage Results" MODIFIED="1493361706817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/5In1RowClient$launcher.coverage" NAME="launcher Coverage Results" MODIFIED="1493363160946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/5In1RowClient$network_client.coverage" NAME="network_client Coverage Results" MODIFIED="1493125359724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -40,11 +37,23 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="game_hall_topbar_frame.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_topbar_frame.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="27">
+              <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+              <folding>
+                <element signature="e#26#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="game_hall_main_frame.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_main_frame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="55" lean-forward="false" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+            <state relative-caret-position="380">
+              <caret line="20" column="44" lean-forward="false" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
               <folding>
                 <element signature="e#26#51#0" expanded="true" />
               </folding>
@@ -52,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game_hall_room_gird.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game_hall_room_gird.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_room_gird.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
+            <state relative-caret-position="431">
+              <caret line="81" column="32" lean-forward="false" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
               <folding>
                 <element signature="e#26#51#0" expanded="true" />
               </folding>
@@ -64,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QWidget.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/PyQt4/QtGui/QWidget.py">
+      <file leaf-file-name="QObject.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/PyQt4/QtCore/QObject.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="700" column="8" lean-forward="false" selection-start-line="700" selection-start-column="8" selection-end-line="700" selection-end-column="8" />
+            <state relative-caret-position="-879">
+              <caret line="40" column="8" lean-forward="false" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -77,8 +86,8 @@
       <file leaf-file-name="game_hall_room_button.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_room_button.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-18">
-              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="399">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="e#26#51#0" expanded="true" />
               </folding>
@@ -86,24 +95,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game_room_manager.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game_room_manager.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Networking/game_room_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="51" column="28" lean-forward="true" selection-start-line="51" selection-start-column="28" selection-end-line="51" selection-end-column="28" />
+            <state relative-caret-position="480">
+              <caret line="85" column="10" lean-forward="true" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
               <folding>
                 <element signature="e#26#62#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="threading.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Python27/Lib/threading.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="753" column="0" lean-forward="false" selection-start-line="753" selection-start-column="0" selection-end-line="753" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -123,8 +122,8 @@
       <file leaf-file-name="network_client.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Networking/network_client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="30" lean-forward="false" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+            <state relative-caret-position="209">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
                 <element signature="e#26#42#0" expanded="true" />
               </folding>
@@ -132,11 +131,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="launcher.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher.py">
+      <file leaf-file-name="QLayout.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/PyQt4/QtGui/QLayout.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="375">
+              <caret line="133" column="20" lean-forward="false" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -198,17 +197,17 @@
         <option value="$PROJECT_DIR$/src/Networking/singleton_base.py" />
         <option value="$PROJECT_DIR$/src/GameHall/game_hall_topbar_frame.py" />
         <option value="$PROJECT_DIR$/src/GameHall/game_hall_room_button.py" />
-        <option value="$PROJECT_DIR$/src/GameHall/game_hall_main_frame.py" />
         <option value="$PROJECT_DIR$/src/Networking/singleton.py" />
         <option value="$PROJECT_DIR$/src/Model/room_model.py" />
-        <option value="$PROJECT_DIR$/src/GameHall/game_hall_room_gird.py" />
         <option value="$PROJECT_DIR$/launcher.py" />
         <option value="$PROJECT_DIR$/src/1/1.py" />
         <option value="$PROJECT_DIR$/src/Networking/__init__.py" />
         <option value="$PROJECT_DIR$/src/Networking/network_client.py" />
-        <option value="$PROJECT_DIR$/src/Networking/game_room_manager.py" />
         <option value="$PROJECT_DIR$/src/Networking/login_manager.py" />
         <option value="$PROJECT_DIR$/src/GameHall/game_hall_widget.py" />
+        <option value="$PROJECT_DIR$/src/Networking/game_room_manager.py" />
+        <option value="$PROJECT_DIR$/src/GameHall/game_hall_main_frame.py" />
+        <option value="$PROJECT_DIR$/src/GameHall/game_hall_room_gird.py" />
       </list>
     </option>
   </component>
@@ -805,16 +804,16 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24895833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32845187" sideWeight="0.6197917" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29497907" sideWeight="0.58229166" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294979" sideWeight="0.49166667" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32845187" sideWeight="0.38020834" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32845187" sideWeight="0.37708333" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29497907" sideWeight="0.42083332" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29497907" sideWeight="0.41770834" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -831,18 +830,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/GameHall/game_hall_room_button.py</url>
-          <line>48</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/Networking/network_client.py</url>
-          <line>11</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -853,18 +840,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="102" />
+      <option name="time" value="104" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/PyQt4/QtGui/QLineEdit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-104">
-          <caret line="420" column="8" lean-forward="false" selection-start-line="420" selection-start-column="8" selection-end-line="420" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/Python27/Lib/socket.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -970,8 +950,8 @@
         <state relative-caret-position="380">
           <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
           <folding>
-            <marker date="1493361123497" expanded="true" signature="157:1029" ph="..." />
-            <marker date="1493361123497" expanded="true" signature="344:1029" ph="..." />
+            <marker date="1493362359402" expanded="true" signature="157:1029" ph="..." />
+            <marker date="1493362359402" expanded="true" signature="344:1029" ph="..." />
           </folding>
         </state>
       </provider>
@@ -981,7 +961,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1493285820656" expanded="true" signature="860:971" ph="..." />
+            <marker date="1493362359552" expanded="true" signature="860:971" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1031,14 +1011,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/PyQt4/QtGui/QLayout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2660">
-          <caret line="143" column="8" lean-forward="false" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1115,16 +1087,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_topbar_frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-          <folding>
-            <element signature="e#26#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/room_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -1138,26 +1100,6 @@
         <state relative-caret-position="418">
           <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="84" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_room_button.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="e#26#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_main_frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="55" lean-forward="false" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
-          <folding>
-            <element signature="e#26#51#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1209,22 +1151,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_room_gird.py">
+    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_widget.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
+        <state relative-caret-position="204">
+          <caret line="88" column="42" lean-forward="true" selection-start-line="88" selection-start-column="42" selection-end-line="88" selection-end-column="42" />
           <folding>
-            <element signature="e#26#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Networking/network_client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="30" lean-forward="false" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-          <folding>
-            <element signature="e#26#42#0" expanded="true" />
+            <element signature="e#27#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1239,22 +1171,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_widget.py">
+    <entry file="file://$PROJECT_DIR$/src/Networking/network_client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="88" column="42" lean-forward="true" selection-start-line="88" selection-start-column="42" selection-end-line="88" selection-end-column="42" />
+        <state relative-caret-position="209">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <element signature="e#27#53#0" expanded="true" />
+            <element signature="e#26#42#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_topbar_frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+          <folding>
+            <element signature="e#26#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/PyQt4/QtGui/QLayout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="133" column="20" lean-forward="false" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/PyQt4/QtCore/QObject.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-879">
+          <caret line="40" column="8" lean-forward="false" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Networking/game_room_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="51" column="28" lean-forward="true" selection-start-line="51" selection-start-column="28" selection-end-line="51" selection-end-column="28" />
+        <state relative-caret-position="480">
+          <caret line="85" column="10" lean-forward="true" selection-start-line="85" selection-start-column="10" selection-end-line="85" selection-end-column="10" />
           <folding>
             <element signature="e#26#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_main_frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="44" lean-forward="false" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+          <folding>
+            <element signature="e#26#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_room_button.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#26#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameHall/game_hall_room_gird.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="81" column="32" lean-forward="false" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
+          <folding>
+            <element signature="e#26#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
