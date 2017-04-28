@@ -86,6 +86,7 @@ class GameHallMainWindow(QWidget):
         if suc:
             title = u'登录成功'
             reason = u'登录成功，请尽情享受对战的乐趣吧~'
+            self.gameRoomManager.requestRoomList()
         else:
             title = u'登录失败'
             reason = u'该账号已登录，请更换账号' if code == 1001 \

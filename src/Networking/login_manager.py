@@ -3,6 +3,7 @@
 from PyQt4.QtCore import *
 import json, logging
 import network_client
+import game_room_manager
 from user_model import UserModel
 
 def singleton(cls, *args, **kw):

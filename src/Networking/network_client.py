@@ -51,8 +51,11 @@ class TcpClient(netstream.netstream):
                             sid = response['sid']
                             cid = response['cid']
                             callbackKey = '%d_%d' % (sid, cid)
-                            callback = self.callbacksDict[callbackKey]
-                            callback(response, data)
+                            try:
+                                callback = self.callbacksDict[callbackKey]
+                                callback(response, data)
+                            except:
+                                logging.warning('callback err ' + callbackKey)
 
             elif self.status() == netstream.NET_STATE_STOP:
                 break
