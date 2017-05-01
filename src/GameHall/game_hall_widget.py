@@ -7,6 +7,7 @@ import logging, json, time
 import game_hall_topbar_frame
 import game_hall_main_frame
 import game_room_manager
+import game_room_widget
 import login_dialog
 import login_manager
 import network_client
@@ -34,6 +35,7 @@ class GameHallMainWindow(QWidget):
         self.gameRoomManager = game_room_manager.GameRoomManager()
         self.connect(self.loginManager, SIGNAL("loginCallback(int, int)"),
                      self.loginCallback)
+        self.connect(self.gameRoomManager, SIGNAL('enterRoom'), self.enterRoom)
 
         # data source
         self.tableList = []
@@ -60,9 +62,6 @@ class GameHallMainWindow(QWidget):
         if self.loginManager.isLogin:
             self.loginDialog.canClose = True
             self.loginDialog.close()
-            # self.gameRoomManager.createRoom()
-            # time.sleep(2)
-            # self.gameRoomManager.createRoom()
 
     def login(self, ip, port, user):
         if isinstance(user, QString):
@@ -100,6 +99,11 @@ class GameHallMainWindow(QWidget):
                                             u'确定')
         if ret == 0:
             self.loginDialogClose()
+
+    def enterRoom(self):
+        window = game_room_widget.GameRoomWidget(self)
+        window.setWindowTitle(u"五子棋")
+        window.show()
 
     def closeWindow(self):
         self.loginDialog.done(1)

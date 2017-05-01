@@ -25,12 +25,12 @@ class LoginManager(QObject):
         self.isLogin
 
     def login(self, account):
-        reqData = {'sid': 0,
-                   'cid': 0,
+        reqData = {'sid': 1000,
+                   'cid': 1000,
                    'account': account}
         jsonReq = json.dumps(reqData)
 
-        callbackKey = '0_0'
+        callbackKey = '1000_1000'
         self.client.callbacksDict[callbackKey] = self.loginCallback
         self.client.send(jsonReq)
         logging.debug('login send' + jsonReq)

@@ -23,19 +23,21 @@ class GameRoomManager(QObject):
         QObject.__init__(self)
         self.client = network_client.TcpClient()
         self.rooms = []
-        self.room = None
+        self.roomId = None
         self.registRoomListCallBack()
 
     # 创建房间
     def createRoom(self):
         if not LoginManager().isLogin:
-            return
-        reqData = {'sid': 1,
-                   'cid': 0,
+            return -1
+        if self.roomId:
+            return -1
+        reqData = {'sid': 1001,
+                   'cid': 1000,
                    'uid': LoginManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
-        callbackKey = '1_0'
+        callbackKey = '1001_1000'
         self.client.callbacksDict[callbackKey] = self.createRoomCallback
         self.client.send(jsonReq)
         logging.debug('create room send' + jsonReq)
@@ -44,29 +46,31 @@ class GameRoomManager(QObject):
     def createRoomCallback(self, response, data):
         allKeys = ['rid', 'result', 'code']
         if [False for key in allKeys if key not in response.keys()]:
-            logging.warning('create room resp key error')
+            logging.warning('create room callback resp key error')
             return
         if response['result']:
+            self.roomId = response['rid']
+            self.emit(SIGNAL("enterRoom"))
             logging.debug('create room suc')
 
     # 请求房间列表
     def requestRoomList(self):
-        reqData = {'sid': 1,
-                   'cid': 1}
+        reqData = {'sid': 1001,
+                   'cid': 1001}
         jsonReq = json.dumps(reqData)
         self.client.send(jsonReq)
         logging.debug('request room list send' + jsonReq)
 
     # 注册房间列表广播回调
     def registRoomListCallBack(self):
-        callbackKey = '1_1'
+        callbackKey = '1001_1001'
         self.client.callbacksDict[callbackKey] = self.roomListCallback
 
     # 房间列表回调
     def roomListCallback(self, response, data):
         allKeys = ['result', 'code', 'rooms']
         if [False for key in allKeys if key not in response.keys()]:
-            logging.warning('room list key error')
+            logging.warning('room list callback key error')
             return
         if response['result']:
             self.rooms = []
@@ -74,14 +78,31 @@ class GameRoomManager(QObject):
             for roomDict in roomsDict:
                 room = RoomModel(roomDict)
                 self.rooms.append(room)
-        self.emit(SIGNAL("refreshRoom"))
+            self.emit(SIGNAL("refreshRoom"))
 
     # 进入房间
     def enterRoom(self):
-        pass
+        if not LoginManager().isLogin:
+            return
+        reqData = {'sid': 1001,
+                   'cid': 1002,
+                   'uid': LoginManager().currentUser.uid}
+        jsonReq = json.dumps(reqData)
+
+        callbackKey = '1001_1002'
+        self.client.callbacksDict[callbackKey] = self.createRoomCallback
+        self.client.send(jsonReq)
+        logging.debug('enter room send' + jsonReq)
 
     # 进入房间回调
-    def enterRoomCallback(self):
+    def enterRoomCallback(self, response, data):
+        allKeys = ['result', 'code', 'rid']
+        if [False for key in allKeys if key not in response.keys()]:
+            logging.warning('enter room callback key error')
+            return
+        if response['result']:
+            self.roomId = response['rid']
+            self.emit(SIGNAL("enterRoom"))
         pass
 
     # 退出房间
