@@ -6,6 +6,7 @@ import game_room_main_frame
 import game_topbar_frame
 import game_room_manager
 import game_play_manager
+import game_room_result_frame
 
 #confirm type
 CONFIRM_START   = 0
@@ -48,13 +49,13 @@ class GameRoomWidget(QWidget):
     def showConfirmBox(self, type):
         if type == CONFIRM_START:
             title = u'对方请求开始游戏'
-        elif type == CONFIRM_START:
+        elif type == CONFIRM_REDO:
             title = u'对方请求悔棋'
-        elif type == CONFIRM_START:
+        elif type == CONFIRM_GIVE_UP:
             title = u'对方放弃'
         ret = QMessageBox(self).information(None, u'确认',title,
                                             u'确定', u'取消')
-        if ret == 0:
+        if ret == 0 and type == CONFIRM_START:
             game_play_manager.GamePlayManager().confirm(CONFIRM_RESPONSE,
                                                              type)
 

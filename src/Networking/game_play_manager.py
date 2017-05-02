@@ -40,6 +40,10 @@ class GamePlayManager(QObject):
         self.isYourTurn = False
         self.registConfirmCallback()
         self.registChessCallback()
+        self.registWinCallback()
+        #悔棋
+        self.xs = []
+        self.ys = []
 
     # 操作确认
     def confirm(self, side, type):
@@ -79,6 +83,11 @@ class GamePlayManager(QObject):
                 self.chessType = response['chess']
                 if self.chessType == BLACK_CHESS:
                     self.isYourTurn = True
+            elif type == CONFIRM_REDO and response.has_key('xs') \
+                    and response.has_key('ys'):
+                self.xs = response['xs']
+                self.ys = response['ys']
+                self.emit(SIGNAL("redo"))
 
     #下棋
     def chess(self, x, y):
@@ -112,6 +121,24 @@ class GamePlayManager(QObject):
             self.isYourTurn = not self.isYourTurn
             self.emit(SIGNAL("chess(int,int,int)"), response['x'],
                       response['y'], response['type'])
+
+    # win
+    def registWinCallback(self):
+        callbackKey = '1002_1002'
+        self.client.callbacksDict[callbackKey] = self.winCallback
+
+    def winCallback(self, response, data):
+        allKeys = ['type']
+        if [False for key in allKeys if key not in response.keys()]:
+            logging.warning('chess callback key error')
+            return
+        type = response['type']
+        win = 1 if self.chessType == type else 0
+        self.isStarting = False
+        self.isYourTurn = False
+        self.chessType = -1
+        self.emit(SIGNAL("chessResult(int)"), win)
+
 
 
 

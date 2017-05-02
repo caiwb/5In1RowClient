@@ -1,5 +1,6 @@
 # -*- encoding:utf-8 -*-
 
+import sip, copy
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import game_play_manager
@@ -30,6 +31,7 @@ class ChessBoard(QFrame):
         self.edge = self.width() * 0.042
         self.gird = (self.width() - self.edge * 2) / 14
         self.chessArr = []
+        self.chessBoardArr = [[None] * 15 for i in range(15)]
 
     def startGame(self):
         pass
@@ -51,6 +53,7 @@ class ChessBoard(QFrame):
         self.chessView.setGeometry(drawX, drawY, 30, 30)
         self.chessView.setMinimumSize(30, 30)
         self.chessArr.append(self.chessView)
+        self.chessBoardArr[x][y] = self.chessView
         self.chessView.show()
 
     def mouseReleaseEvent(self, event):
@@ -61,6 +64,22 @@ class ChessBoard(QFrame):
             y = int(round((event.pos().y() - self.edge) / self.gird))
             game_play_manager.GamePlayManager().chess(x, y)
 
+    def clear(self):
+        for i in range(len(self.chessArr)):
+            chess = self.chessArr[i]
+            chess.close()
+        self.chessArr = []
+        self.chessBoardArr = [[None] * 15 for i in range(15)]
 
+    def redo(self):
+        xs = game_play_manager.GamePlayManager().xs
+        ys = game_play_manager.GamePlayManager().ys
+        for i in range(len(xs)):
+            chess = self.chessBoardArr[xs[i]][ys[i]]
+            chess.close()
+            self.chessBoardArr[xs[i]][ys[i]] = None
+
+        game_play_manager.GamePlayManager().xs = []
+        game_play_manager.GamePlayManager().ys = []
 
 

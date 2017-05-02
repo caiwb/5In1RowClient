@@ -106,6 +106,5 @@ class GameHallMainWindow(QWidget):
         window.setWindowTitle(u"五子棋")
         window.show()
 
-    # def closeWindow(self):
-    #     self.loginDialog.done(1)
-    #     self.close()
+    def closeEvent(self, event):
+        game_room_manager.GameRoomManager().leaveRoom()
