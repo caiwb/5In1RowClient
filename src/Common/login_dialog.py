@@ -64,7 +64,7 @@ class LoginDialog(QDialog):
 
         quitBtn = QPushButton(self)
         quitBtn.setText(u'退出')
-        quitBtn.clicked.connect(parent.closeWindow)
+        quitBtn.clicked.connect(parent.close)
         quitBtn.setGeometry(90, 220, 85, 30)
 
         self.loadingLbl = QLabel(self)

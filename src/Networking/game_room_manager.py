@@ -23,14 +23,14 @@ class GameRoomManager(QObject):
         QObject.__init__(self)
         self.client = network_client.TcpClient()
         self.rooms = []
-        self.roomId = None
+        self.room = None
         self.registRoomListCallBack()
 
     # 创建房间
     def createRoom(self):
         if not LoginManager().isLogin:
             return -1
-        if self.roomId:
+        if self.room:
             return -1
         reqData = {'sid': 1001,
                    'cid': 1000,
@@ -44,12 +44,13 @@ class GameRoomManager(QObject):
 
     # 创建房间回调
     def createRoomCallback(self, response, data):
-        allKeys = ['rid', 'result', 'code']
+        allKeys = ['room', 'result', 'code']
         if [False for key in allKeys if key not in response.keys()]:
             logging.warning('create room callback resp key error')
             return
         if response['result']:
-            self.roomId = response['rid']
+            roomdict = response['room']
+            self.room = RoomModel(roomdict)
             self.emit(SIGNAL("enterRoom"))
             logging.debug('create room suc')
 
@@ -81,11 +82,14 @@ class GameRoomManager(QObject):
             self.emit(SIGNAL("refreshRoom"))
 
     # 进入房间
-    def enterRoom(self):
+    def enterRoom(self, rid):
         if not LoginManager().isLogin:
+            return
+        if not rid:
             return
         reqData = {'sid': 1001,
                    'cid': 1002,
+                   'rid': rid,
                    'uid': LoginManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
@@ -96,12 +100,13 @@ class GameRoomManager(QObject):
 
     # 进入房间回调
     def enterRoomCallback(self, response, data):
-        allKeys = ['result', 'code', 'rid']
+        allKeys = ['result', 'code', 'room']
         if [False for key in allKeys if key not in response.keys()]:
             logging.warning('enter room callback key error')
             return
         if response['result']:
-            self.roomId = response['rid']
+            roomdict = response['room']
+            self.room = RoomModel(roomdict)
             self.emit(SIGNAL("enterRoom"))
         pass
 

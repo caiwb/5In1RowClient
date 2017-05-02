@@ -1,11 +1,12 @@
 # -*- encoding: UTF-8 -*-
 
+import logging
+
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import logging, json, time
-import game_hall_topbar_frame
 import game_hall_main_frame
+import game_topbar_frame
 import game_room_manager
 import game_room_widget
 import login_dialog
@@ -45,7 +46,7 @@ class GameHallMainWindow(QWidget):
         self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint |
                             Qt.WindowMinMaxButtonsHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.topbarFrame = game_hall_topbar_frame.GameHallTopBar(self)
+        self.topbarFrame = game_topbar_frame.GameTopBar(self, self)
         self.mainFrame = game_hall_main_frame.GameHallMain(self)
 
         #dialog
@@ -105,6 +106,6 @@ class GameHallMainWindow(QWidget):
         window.setWindowTitle(u"五子棋")
         window.show()
 
-    def closeWindow(self):
-        self.loginDialog.done(1)
-        self.close()
+    # def closeWindow(self):
+    #     self.loginDialog.done(1)
+    #     self.close()

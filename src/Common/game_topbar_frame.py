@@ -3,10 +3,11 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-class GameHallTopBar(QFrame):
-    def __init__(self, parent=None):
+class GameTopBar(QFrame):
+    def __init__(self, parent, eventer):
         QFrame.__init__(self, parent)
         self.parent = parent
+        self.eventer = eventer
         self.setStyleSheet(
         '''
         border-image: url(res/bgColor.png);
@@ -41,23 +42,23 @@ class GameHallTopBar(QFrame):
         closeButton = PushButton(parent)
         closeButton.loadPixmap('res/close.png')
         closeButton.setGeometry(770, 10, 16, 16)
-        closeButton.clicked.connect(self.parent.closeWindow)
+        closeButton.clicked.connect(self.parent.close)
 
         miniButton = PushButton(parent)
         miniButton.loadPixmap('res/mini.png')
         miniButton.setGeometry(740, 10, 16, 16)
-        miniButton.clicked.connect(self.parent.showMinimized)
+        miniButton.clicked.connect(self.eventer.showMinimized)
 
     def mousePressEvent(self, event):
         self.isDraging = True
-        self.parent.dragPostion = event.globalPos() - self.parent.pos()
+        self.eventer.dragPostion = event.globalPos() - self.eventer.pos()
 
     def mouseReleaseEvent(self, event):
         self.isDraging = False
 
     def mouseMoveEvent(self, event):
         if self.isDraging:
-            self.parent.move(event.globalPos() - self.parent.dragPostion)
+            self.eventer.move(event.globalPos() - self.eventer.dragPostion)
 
 
 class PushButton(QPushButton):
