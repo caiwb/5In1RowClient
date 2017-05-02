@@ -118,7 +118,7 @@ class GameRoomManager(QObject):
                 self.emit(SIGNAL('enterRoom'))
                 self.room = RoomModel(roomdict)
             else:
-                self.emit('refreshRoom')
+                self.emit(SIGNAL('refreshRoom'))
 
     # 退出房间
     def leaveRoom(self):
