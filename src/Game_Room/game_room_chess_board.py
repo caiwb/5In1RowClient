@@ -35,32 +35,30 @@ class ChessBoard(QFrame):
         pass
 
     def drawChess(self, x, y, type):
-        drawX = self.edge + x * self.gird - 17
-        drawY = self.edge + y * self.gird - 17
-        chessView = QFrame(self)
+        drawX = self.edge + x * self.gird - 15
+        drawY = self.edge + y * self.gird - 15
+        self.chessView = QFrame(self)
         if type == WHITE_CHESS:
-            chessView.setStyleSheet('''
-                QGraphicsView{
+            self.chessView.setStyleSheet('''
                 border-image: url(res/white.png);
                 background-repeat: no-repeat;
-                }
                 ''')
         elif type == BLACK_CHESS:
-            chessView.setStyleSheet('''
-                QGraphicsView{
+            self.chessView.setStyleSheet('''
                 border-image: url(res/black.png);
                 background-repeat: no-repeat;
-                }
                 ''')
-        chessView.setGeometry(drawX, drawY, 17, 17)
-        self.chessArr.append(chessView)
+        self.chessView.setGeometry(drawX, drawY, 30, 30)
+        self.chessView.setMinimumSize(30, 30)
+        self.chessArr.append(self.chessView)
+        self.chessView.show()
 
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton and \
                 game_play_manager.GamePlayManager().isStarting and \
                 game_play_manager.GamePlayManager().isYourTurn:
-            x = round((event.pos().x() - self.edge) / self.gird)
-            y = round((event.pos().y() - self.edge) / self.gird)
+            x = int(round((event.pos().x() - self.edge) / self.gird))
+            y = int(round((event.pos().y() - self.edge) / self.gird))
             game_play_manager.GamePlayManager().chess(x, y)
 
 

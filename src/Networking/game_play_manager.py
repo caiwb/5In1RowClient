@@ -38,7 +38,6 @@ class GamePlayManager(QObject):
         self.isStarting = False
         self.chessType = -1
         self.isYourTurn = False
-
         self.registConfirmCallback()
         self.registChessCallback()
 
@@ -85,8 +84,9 @@ class GamePlayManager(QObject):
     def chess(self, x, y):
         if not LoginManager().isLogin or not game_room_manager.GameRoomManager().room:
             return 0
-        if self.chessType == -1:
+        if self.chessType == -1 or x > 14 or y > 14 or x < 0 or y < 0:
             return 0
+
         reqData = {'sid': 1002,
                    'cid': 1001,
                    'uid': LoginManager().currentUser.uid,
@@ -109,6 +109,7 @@ class GamePlayManager(QObject):
             logging.warning('chess callback key error')
             return
         if response['result']:
+            self.isYourTurn = not self.isYourTurn
             self.emit(SIGNAL("chess(int,int,int)"), response['x'],
                       response['y'], response['type'])
 
