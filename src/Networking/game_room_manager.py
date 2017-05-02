@@ -1,10 +1,10 @@
 #-*- encoding: UTF-8 -*-
 
-from network_client import TcpClient
 from PyQt4.QtCore import *
 import json, logging
 import network_client
 from login_manager import LoginManager
+from game_play_manager import GamePlayManager
 from room_model import RoomModel
 
 def singleton(cls, *args, **kw):
@@ -150,6 +150,9 @@ class GameRoomManager(QObject):
             logging.debug('leave room suc')
             if response['uid'] == LoginManager().currentUser.uid:
                 self.room = None
+                GamePlayManager().isYourTurn = False
+                GamePlayManager().isStarting = False
+                GamePlayManager().chessType = -1
             else:
                 self.room = RoomModel(response['room'])
             self.emit(SIGNAL('refreshRoom'))

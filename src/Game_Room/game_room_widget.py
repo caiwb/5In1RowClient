@@ -5,11 +5,24 @@ from PyQt4.QtCore import *
 import game_room_main_frame
 import game_topbar_frame
 import game_room_manager
+import game_play_manager
+
+#confirm type
+CONFIRM_START   = 0
+CONFIRM_REDO    = 1
+CONFIRM_GIVE_UP = 2
+
+#confirm side
+CONFIRM_REQUEST  = 0
+CONFIRM_RESPONSE = 1
 
 
 class GameRoomWidget(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
+
+        self.connect(game_play_manager.GamePlayManager(),
+                     SIGNAL("requestWithType(int)"), self.showConfirmBox)
         # ui
         self.resize(800, 600)
         self.topbarFrame = game_topbar_frame.GameTopBar(self, self.parent())
@@ -31,3 +44,17 @@ class GameRoomWidget(QWidget):
                 game_room_manager.GameRoomManager().leaveRoom()
             else:
                 event.ignore()
+
+    def showConfirmBox(self, type):
+        if type == CONFIRM_START:
+            title = u'对方请求开始游戏'
+        elif type == CONFIRM_START:
+            title = u'对方请求悔棋'
+        elif type == CONFIRM_START:
+            title = u'对方放弃'
+        ret = QMessageBox(self).information(None, u'确认',title,
+                                            u'确定', u'取消')
+        if ret == 0:
+            game_play_manager.GamePlayManager().confirm(CONFIRM_RESPONSE,
+                                                             type)
+
