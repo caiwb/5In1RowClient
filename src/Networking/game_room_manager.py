@@ -116,9 +116,9 @@ class GameRoomManager(QObject):
             logging.debug('enter room suc')
             if not self.room:
                 self.emit(SIGNAL('enterRoom'))
-                self.room = RoomModel(roomdict)
             else:
                 self.emit(SIGNAL('refreshRoom'))
+            self.room = RoomModel(roomdict)
 
     # 退出房间
     def leaveRoom(self):
@@ -152,5 +152,5 @@ class GameRoomManager(QObject):
                 self.room = None
             else:
                 self.room = RoomModel(response['room'])
-                self.emit(SIGNAL('refreshRoom'))
+            self.emit(SIGNAL('refreshRoom'))
 

@@ -27,7 +27,6 @@ class GameRoomUserInfo(QFrame):
         self.rivalInfoLbl.setAlignment(Qt.AlignLeft)
 
     def refreshData(self):
-        print 'refresh'
         room = self.roomManager.room
         if not room:
             return
@@ -38,3 +37,6 @@ class GameRoomUserInfo(QFrame):
             else:
                 self.rivalInfoLbl.setText(u'敌方：%s  \n得分：%d' %
                                           (user.account, user.score))
+
+        if len(self.roomManager.room.users) == 1:
+            self.rivalInfoLbl.setText('')
