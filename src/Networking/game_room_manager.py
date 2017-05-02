@@ -25,6 +25,7 @@ class GameRoomManager(QObject):
         self.rooms = []
         self.room = None
         self.registRoomListCallBack()
+        self.registEnterRoomCallback()
 
     # 创建房间
     def createRoom(self):
@@ -51,7 +52,7 @@ class GameRoomManager(QObject):
         if response['result']:
             roomdict = response['room']
             self.room = RoomModel(roomdict)
-            self.emit(SIGNAL("enterRoom"))
+            # self.emit(SIGNAL("enterRoom"))
             logging.debug('create room suc')
 
     # 请求房间列表
@@ -79,7 +80,7 @@ class GameRoomManager(QObject):
             for roomDict in roomsDict:
                 room = RoomModel(roomDict)
                 self.rooms.append(room)
-            self.emit(SIGNAL("refreshRoom"))
+            self.emit(SIGNAL("refreshRooms"))
 
     # 进入房间
     def enterRoom(self, rid):
@@ -93,10 +94,14 @@ class GameRoomManager(QObject):
                    'uid': LoginManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
-        callbackKey = '1001_1002'
-        self.client.callbacksDict[callbackKey] = self.createRoomCallback
+        self.registEnterRoomCallback()
         self.client.send(jsonReq)
         logging.debug('enter room send' + jsonReq)
+
+    # 注册进入房间回调
+    def registEnterRoomCallback(self):
+        callbackKey = '1001_1002'
+        self.client.callbacksDict[callbackKey] = self.createRoomCallback
 
     # 进入房间回调
     def enterRoomCallback(self, response, data):
@@ -107,8 +112,10 @@ class GameRoomManager(QObject):
         if response['result']:
             roomdict = response['room']
             self.room = RoomModel(roomdict)
-            self.emit(SIGNAL("enterRoom"))
-        pass
+            # if len(self.room.users) == 1:
+            #     self.emit(SIGNAL("enterRoom"))
+            # elif len(self.room.users) == 2:
+            #     self.emit(SIGNAL("refreshRoom"))
 
     # 退出房间
     def leaveRoom(self):

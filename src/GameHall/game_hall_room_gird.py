@@ -11,6 +11,7 @@ class GameHallRoomGird(QFrame):
         QFrame.__init__(self, parent)
 
         self.btns = []
+        self.roomManager = GameRoomManager()
 
         self.setStyleSheet("background-color: rgba(0, 0, 0, 0)")
         self.scrollFrame = QFrame(self)
@@ -59,7 +60,7 @@ class GameHallRoomGird(QFrame):
         self.movie.setSpeed(70)
         self.loadingLbl.setMovie(self.movie)
 
-        self.connect(GameRoomManager(), SIGNAL('refreshRoom'), self.refreshData)
+        self.connect(GameRoomManager(), SIGNAL('refreshRooms'), self.refreshData)
         self.refreshData()
 
     def createRoom(self):
@@ -76,10 +77,9 @@ class GameHallRoomGird(QFrame):
 
         self.btns = []
 
-        for i in range(1 + len(GameRoomManager().rooms)):
-            if not i:
-                continue
-            roomBtn = game_hall_room_button.GameHallRoomButton(self)
+        for idx, room in enumerate(self.roomManager.rooms):
+            i = idx + 1
+            roomBtn = game_hall_room_button.GameHallRoomButton(room, self)
             roomBtn.setMinimumSize(120, 120)
             roomBtn.setUserCount(len(GameRoomManager().rooms[i - 1].users))
             self.btns.append(roomBtn)

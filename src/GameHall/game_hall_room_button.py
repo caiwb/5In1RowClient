@@ -2,11 +2,12 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import copy
+import game_room_manager
 
 class GameHallRoomButton(QPushButton):
-    def __init__(self, parent=None):
+    def __init__(self, room, parent=None):
         QPushButton.__init__(self, parent)
+        self.room = room
         self.setObjectName("btnSpecial")
         self.setStyleSheet(
         '''
@@ -79,3 +80,6 @@ class GameHallRoomButton(QPushButton):
             border-image: url(res/user.png);
             background-repeat: no-repeat;
             ''')
+
+    def mousePressEvent(self, event):
+        game_room_manager.GameRoomManager().enterRoom(self.room.roomId)

@@ -2,6 +2,7 @@
 
 from PyQt4.QtGui import *
 import game_room_chess_board
+import game_room_user_info
 
 class GameRoomMain(QFrame):
     def __init__(self, parent=None):
@@ -16,4 +17,5 @@ class GameRoomMain(QFrame):
         ''')
         self.setGeometry(0, 67, 800, 533)
 
-        self.chessBoard = game_room_chess_board.ChessBoard(self)
+        self.chessBoardFrame = game_room_chess_board.ChessBoard(self)
+        self.userInfoFrame = game_room_user_info.GameRoomUserInfo(self)

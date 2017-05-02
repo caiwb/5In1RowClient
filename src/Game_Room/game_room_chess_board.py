@@ -7,9 +7,10 @@ class ChessBoard(QFrame):
         self.parent = parent
         self.setStyleSheet(
             '''
-            GameRoomMain{
+            ChessBoard{
             border-image: url(res/chessboard.png);
             background-repeat: no-repeat;
             }
             ''')
-        self.setGeometry(0, 0, 540, 540)
+        self.setGeometry(15, 15, 500, 500)
+
