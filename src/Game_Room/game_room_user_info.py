@@ -1,5 +1,8 @@
-from PyQt4.QtGui import *
+# -*- encoding:utf-8 -*-
 
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
+import game_room_manager
 
 class GameRoomUserInfo(QFrame):
     def __init__(self, parent=None):
@@ -7,6 +10,8 @@ class GameRoomUserInfo(QFrame):
         self.parent = parent
         self.setStyleSheet("GameRoomUserInfo{background-color: rgba(0, 0, 0, 100)}")
         self.setGeometry(530, 15, 255, 100)
+        self.connect(game_room_manager.GameRoomManager(), SIGNAL('refreshRoom'),
+                     self.refreshData)
         self.setup()
 
     def setup(self):
@@ -14,4 +19,4 @@ class GameRoomUserInfo(QFrame):
         self.rivalInfoLbl = QLabel(self)
 
     def refreshData(self):
-        pass
+        print 'refresh'

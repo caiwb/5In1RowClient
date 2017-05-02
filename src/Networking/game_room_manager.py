@@ -26,13 +26,14 @@ class GameRoomManager(QObject):
         self.room = None
         self.registRoomListCallBack()
         self.registEnterRoomCallback()
+        self.registleaveRoomCallback()
 
     # 创建房间
     def createRoom(self):
         if not LoginManager().isLogin:
-            return -1
+            return 0
         if self.room:
-            return -1
+            return 0
         reqData = {'sid': 1001,
                    'cid': 1000,
                    'uid': LoginManager().currentUser.uid}
@@ -52,7 +53,7 @@ class GameRoomManager(QObject):
         if response['result']:
             roomdict = response['room']
             self.room = RoomModel(roomdict)
-            # self.emit(SIGNAL("enterRoom"))
+            self.emit(SIGNAL("enterRoom"))
             logging.debug('create room suc')
 
     # 请求房间列表
@@ -88,20 +89,21 @@ class GameRoomManager(QObject):
             return
         if not rid:
             return
+        if self.room:
+            return
         reqData = {'sid': 1001,
                    'cid': 1002,
                    'rid': rid,
                    'uid': LoginManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
-        self.registEnterRoomCallback()
         self.client.send(jsonReq)
         logging.debug('enter room send' + jsonReq)
 
     # 注册进入房间回调
     def registEnterRoomCallback(self):
         callbackKey = '1001_1002'
-        self.client.callbacksDict[callbackKey] = self.createRoomCallback
+        self.client.callbacksDict[callbackKey] = self.enterRoomCallback
 
     # 进入房间回调
     def enterRoomCallback(self, response, data):
@@ -111,16 +113,44 @@ class GameRoomManager(QObject):
             return
         if response['result']:
             roomdict = response['room']
-            self.room = RoomModel(roomdict)
-            # if len(self.room.users) == 1:
-            #     self.emit(SIGNAL("enterRoom"))
-            # elif len(self.room.users) == 2:
-            #     self.emit(SIGNAL("refreshRoom"))
+            logging.debug('enter room suc')
+            if not self.room:
+                self.emit(SIGNAL('enterRoom'))
+                self.room = RoomModel(roomdict)
+            else:
+                self.emit('refreshRoom')
 
     # 退出房间
     def leaveRoom(self):
-        pass
+        if not LoginManager().isLogin:
+            return
+        if not self.room:
+            return
+        reqData = {'sid': 1001,
+                   'cid': 1003,
+                   'rid': self.room.roomId,
+                   'uid': LoginManager().currentUser.uid}
+        jsonReq = json.dumps(reqData)
+
+        self.client.send(jsonReq)
+        logging.debug('leave room send' + jsonReq)
+
+    # 注册退出房间回调
+    def registleaveRoomCallback(self):
+        callbackKey = '1001_1003'
+        self.client.callbacksDict[callbackKey] = self.leaveRoomCallback
 
     # 退出房间回调
-    def leaveRoomCallback(self):
-        pass
+    def leaveRoomCallback(self, response, data):
+        allKeys = ['result', 'code']
+        if [False for key in allKeys if key not in response.keys()]:
+            logging.warning('leave room callback key error')
+            return
+        if response['result']:
+            logging.debug('leave room suc')
+            if response['uid'] == LoginManager().currentUser.uid:
+                self.room = None
+            else:
+                self.room = RoomModel(response['room'])
+                self.emit(SIGNAL('refreshRoom'))
+

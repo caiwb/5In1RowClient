@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import game_room_main_frame
 import game_topbar_frame
+import game_room_manager
 
 
 class GameRoomWidget(QWidget):
@@ -27,5 +28,6 @@ class GameRoomWidget(QWidget):
             if ret == 0:
                 self.canClose = True
                 self.close()
+                game_room_manager.GameRoomManager().leaveRoom()
             else:
                 event.ignore()

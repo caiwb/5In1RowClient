@@ -66,7 +66,7 @@ class GameHallRoomGird(QFrame):
     def createRoom(self):
         self.showLoading()
         rslt = GameRoomManager().createRoom()
-        if rslt == -1:
+        if not rslt:
             self.hideLoading()
 
     def refreshData(self):
