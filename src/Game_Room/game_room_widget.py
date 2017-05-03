@@ -55,7 +55,7 @@ class GameRoomWidget(QWidget):
             title = u'对方放弃'
         ret = QMessageBox(self).information(None, u'确认',title,
                                             u'确定', u'取消')
-        if ret == 0 and type == CONFIRM_START:
+        if ret == 0:
             game_play_manager.GamePlayManager().confirm(CONFIRM_RESPONSE,
                                                              type)
 

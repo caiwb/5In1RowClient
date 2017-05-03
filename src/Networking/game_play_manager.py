@@ -41,9 +41,6 @@ class GamePlayManager(QObject):
         self.registConfirmCallback()
         self.registChessCallback()
         self.registWinCallback()
-        #悔棋
-        self.xs = []
-        self.ys = []
 
     # 操作确认
     def confirm(self, side, type):
@@ -55,6 +52,7 @@ class GamePlayManager(QObject):
                    'uid': LoginManager().currentUser.uid,
                    'rid': game_room_manager.GameRoomManager().room.roomId,
                    'type': type,
+                   'chess_type': 3 - self.chessType,
                    'side': side}
         jsonReq = json.dumps(reqData)
         self.client.send(jsonReq)
@@ -83,11 +81,12 @@ class GamePlayManager(QObject):
                 self.chessType = response['chess']
                 if self.chessType == BLACK_CHESS:
                     self.isYourTurn = True
-            elif type == CONFIRM_REDO and response.has_key('xs') \
-                    and response.has_key('ys'):
-                self.xs = response['xs']
-                self.ys = response['ys']
-                self.emit(SIGNAL("redo"))
+            elif type == CONFIRM_REDO and response.has_key('step') and\
+                    response.has_key('chess_type'):
+                stepCount = response['step']
+                self.isYourTurn = True if \
+                    response['chess_type'] == self.chessType else False
+                self.emit(SIGNAL("redo(int)"), stepCount)
 
     #下棋
     def chess(self, x, y):

@@ -30,7 +30,7 @@ class GameRoomMain(QFrame):
         self.connect(game_play_manager.GamePlayManager(),
                      SIGNAL("chessResult(int)"), self.showResult)
         self.connect(game_play_manager.GamePlayManager(),
-                     SIGNAL("redo"), self.chessBoardFrame.redo)
+                     SIGNAL("redo(int)"), self.chessBoardFrame.redo)
 
     def showResult(self, win):
         self.resultFrame = game_room_result_frame.GameRoomResultFrame(win, self)
