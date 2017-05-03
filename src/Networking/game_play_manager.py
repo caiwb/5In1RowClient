@@ -38,6 +38,7 @@ class GamePlayManager(QObject):
         self.isStarting = False
         self.chessType = -1
         self.isYourTurn = False
+        self.isConfirming = False
         self.registConfirmCallback()
         self.registChessCallback()
         self.registWinCallback()
@@ -50,7 +51,10 @@ class GamePlayManager(QObject):
             return 0
         if (type == CONFIRM_REDO or type == CONFIRM_GIVE_UP) and not self.isStarting:
             return 0
+        if self.isConfirming:
+            return 0
 
+        self.isConfirming = True
         reqData = {'sid': 1002,
                    'cid': 1000,
                    'uid': LoginManager().currentUser.uid,
@@ -78,6 +82,7 @@ class GamePlayManager(QObject):
             self.emit(SIGNAL("requestWithType(int)"), type)
         elif response['side'] == CONFIRM_RESPONSE:
             type = int(response['type'])
+            self.isConfirming = False
             # 开始游戏确认
             if type == CONFIRM_START and response.has_key('chess'):
                 self.isStarting = True
@@ -139,6 +144,7 @@ class GamePlayManager(QObject):
         win = 1 if self.chessType == type else 0
         self.isStarting = False
         self.isYourTurn = False
+        self.isConfirming = False
         self.chessType = -1
         self.emit(SIGNAL("chessResult(int)"), win)
 
