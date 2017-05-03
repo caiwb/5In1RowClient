@@ -91,6 +91,8 @@ class GamePlayManager(QObject):
                 self.chessType = response['chess']
                 if self.chessType == BLACK_CHESS:
                     self.isYourTurn = True
+                self.emit(SIGNAL("showTextWithRGB(QString,int,int,int)"),
+                          QString(u'双方确认完毕，游戏开始'), 255, 0 ,0)
             elif type == CONFIRM_REDO and response.has_key('step') and\
                     response.has_key('chess_type'):
                 stepCount = response['step']
@@ -148,6 +150,9 @@ class GamePlayManager(QObject):
         self.isConfirming = False
         self.chessType = -1
         self.emit(SIGNAL("chessResult(int)"), win)
+
+        self.emit(SIGNAL("showTextWithRGB(QString,int,int,int)"),
+                  QString(u'游戏结束'), 255, 0, 0)
 
         roomdict = response['room']
         game_room_manager.GameRoomManager().room = room_model.RoomModel(roomdict)

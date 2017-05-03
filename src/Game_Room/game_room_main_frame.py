@@ -8,6 +8,7 @@ import game_room_btns_frame
 import game_play_manager
 import game_room_result_frame
 import game_room_chat_view
+import game_room_chat_tool_bar
 
 class GameRoomMain(QFrame):
     def __init__(self, parent=None):
@@ -26,6 +27,7 @@ class GameRoomMain(QFrame):
         self.userInfoFrame = game_room_user_info.GameRoomUserInfo(self)
         self.btnsFrame = game_room_btns_frame.GameRoomBtnsFrame(self)
         self.chatTable = game_room_chat_view.GameRoomChatView(self)
+        self.chatToolBar = game_room_chat_tool_bar.GameRoomChatToolBar(self)
 
         self.connect(game_play_manager.GamePlayManager(),
                      SIGNAL("chessResult(int)"), self.showResult)

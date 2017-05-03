@@ -23,6 +23,10 @@ class LoginManager(QObject):
         self.client = network_client.TcpClient()
         self.currentUser = None
         self.isLogin
+        self.userScore = []
+
+        callbackKey = '1000_1001'
+        self.client.callbacksDict[callbackKey] = self.rankCallback
 
     def login(self, account):
         reqData = {'sid': 1000,
@@ -53,3 +57,12 @@ class LoginManager(QObject):
     @property
     def isLogin(self):
         return True if self.currentUser else False
+
+    def rankCallback(self, response, data):
+        allKeys = ['users']
+        if [False for key in allKeys if key not in response.keys()]:
+            logging.debug('rank resp key error')
+            return
+        self.userScore = response['users']
+        self.userScore.sort(key=lambda obj: obj.get('score'), reverse=True)
+        self.emit(SIGNAL("refreshRank"))

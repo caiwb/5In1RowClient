@@ -24,9 +24,11 @@ class GameRoomManager(QObject):
         self.client = network_client.TcpClient()
         self.rooms = []
         self.room = None
+
         self.registRoomListCallBack()
         self.registEnterRoomCallback()
         self.registleaveRoomCallback()
+        self.registChatCallback()
 
     # 创建房间
     def createRoom(self):
@@ -164,3 +166,30 @@ class GameRoomManager(QObject):
                 self.room = RoomModel(response['room'])
             self.emit(SIGNAL('refreshRoom'))
 
+    # 聊天请求
+    def chat(self, text):
+        if not LoginManager().isLogin:
+            return 0
+        if not self.room:
+            return 0
+        reqData = {'sid': 1001,
+                   'cid': 1004,
+                   'uid': LoginManager().currentUser.uid,
+                   'rid': self.room.roomId,
+                   'text': text}
+        jsonReq = json.dumps(reqData)
+        self.client.send(jsonReq)
+        logging.debug('chat text send' + jsonReq)
+
+    def registChatCallback(self):
+        callbackKey = '1001_1004'
+        self.client.callbacksDict[callbackKey] = self.chatCallback
+
+    def chatCallback(self, response, data):
+        allKeys = ['text', 'uid']
+        if [False for key in allKeys if key not in response.keys()]:
+            logging.warning('chat callback key error')
+            return
+        text = response['uid'] + ': ' + response['text']
+        self.emit(SIGNAL("showTextWithRGB(QString,int,int,int)"),
+                  text, 0, 0, 0)

@@ -19,12 +19,18 @@ class GameRoomUserInfo(QFrame):
         self.refreshData()
 
     def setup(self):
+        font = QFont()
+        font.setPointSize(12)
+
         self.myInfoLbl = QLabel(self)
         self.myInfoLbl.setGeometry(0, 0, 120, 50)
         self.myInfoLbl.setAlignment(Qt.AlignLeft)
+        self.myInfoLbl.setFont(font)
+
         self.rivalInfoLbl = QLabel(self)
         self.rivalInfoLbl.setGeometry(130, 0, 120, 50)
         self.rivalInfoLbl.setAlignment(Qt.AlignLeft)
+        self.rivalInfoLbl.setFont(font)
 
     def refreshData(self):
         room = self.roomManager.room
