@@ -36,7 +36,8 @@ class GameHallMainWindow(QWidget):
         self.gameRoomManager = game_room_manager.GameRoomManager()
         self.connect(self.loginManager, SIGNAL("loginCallback(int, int)"),
                      self.loginCallback)
-        self.connect(self.gameRoomManager, SIGNAL('enterRoom'), self.enterRoom)
+        self.connect(self.gameRoomManager, SIGNAL("enterRoom"), self.enterRoom)
+        self.connect(self.loginManager, SIGNAL("showLogin"), self.showLogin)
 
         # data source
         self.tableList = []
@@ -48,6 +49,7 @@ class GameHallMainWindow(QWidget):
         self.setAttribute(Qt.WA_TranslucentBackground)
         self.topbarFrame = game_topbar_frame.GameTopBar(self, self)
         self.mainFrame = game_hall_main_frame.GameHallMain(self)
+        self.roomWindow = None
 
         #dialog
         self.loginDialog = login_dialog.LoginDialog(self)
@@ -102,9 +104,14 @@ class GameHallMainWindow(QWidget):
             self.loginDialogClose()
 
     def enterRoom(self):
-        window = game_room_widget.GameRoomWidget(self)
-        window.setWindowTitle(u"五子棋")
-        window.show()
+        self.roomWindow = game_room_widget.GameRoomWidget(self)
+        self.roomWindow.setWindowTitle(u"五子棋")
+        self.roomWindow.show()
 
     def closeEvent(self, event):
         game_room_manager.GameRoomManager().leaveRoom()
+
+    def showLogin(self):
+        if self.roomWindow:
+            self.roomWindow.close()
+        self.loginDialog.open()
