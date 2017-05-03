@@ -46,6 +46,10 @@ class GamePlayManager(QObject):
     def confirm(self, side, type):
         if not LoginManager().isLogin or not game_room_manager.GameRoomManager().room:
             return 0
+        if type == CONFIRM_START and self.isStarting:
+            return 0
+        if (type == CONFIRM_REDO or type == CONFIRM_GIVE_UP) and not self.isStarting:
+            return 0
 
         reqData = {'sid': 1002,
                    'cid': 1000,
