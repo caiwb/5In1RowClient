@@ -52,6 +52,9 @@ class GameRoomManager(QObject):
             return
         if response['result']:
             roomdict = response['room']
+            GamePlayManager().isYourTurn = False
+            GamePlayManager().isStarting = False
+            GamePlayManager().chessType = -1
             self.room = RoomModel(roomdict)
             self.emit(SIGNAL("enterRoom"))
             logging.debug('create room suc')
@@ -113,12 +116,16 @@ class GameRoomManager(QObject):
             return
         if response['result']:
             roomdict = response['room']
+            GamePlayManager().isYourTurn = False
+            GamePlayManager().isStarting = False
+            GamePlayManager().chessType = -1
             logging.debug('enter room suc')
             if not self.room:
                 self.emit(SIGNAL('enterRoom'))
+                self.room = RoomModel(roomdict)
             else:
+                self.room = RoomModel(roomdict)
                 self.emit(SIGNAL('refreshRoom'))
-            self.room = RoomModel(roomdict)
 
     # 退出房间
     def leaveRoom(self):

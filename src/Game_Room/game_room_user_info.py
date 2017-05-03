@@ -23,7 +23,7 @@ class GameRoomUserInfo(QFrame):
         self.myInfoLbl.setGeometry(0, 0, 120, 50)
         self.myInfoLbl.setAlignment(Qt.AlignLeft)
         self.rivalInfoLbl = QLabel(self)
-        self.rivalInfoLbl.setGeometry(120, 0, 120, 50)
+        self.rivalInfoLbl.setGeometry(130, 0, 120, 50)
         self.rivalInfoLbl.setAlignment(Qt.AlignLeft)
 
     def refreshData(self):

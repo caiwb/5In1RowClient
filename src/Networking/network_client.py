@@ -56,7 +56,7 @@ class TcpClient(netstream.netstream):
                             logging.debug("--------recvhb1")
                             self.hbTimeoutCount = 0
                             self.hbTimer = time.time()
-                            return
+                            continue
                         logging.debug('recv' + data)
                         response = json.loads(data)
                         if response.has_key('sid') and response.has_key('cid'):

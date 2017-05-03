@@ -5,6 +5,7 @@ import json, logging
 import game_room_manager
 from login_manager import LoginManager
 import network_client
+import room_model
 
 def singleton(cls, *args, **kw):
     instances = {}
@@ -136,9 +137,9 @@ class GamePlayManager(QObject):
         self.client.callbacksDict[callbackKey] = self.winCallback
 
     def winCallback(self, response, data):
-        allKeys = ['type']
+        allKeys = ['type', 'room']
         if [False for key in allKeys if key not in response.keys()]:
-            logging.warning('chess callback key error')
+            logging.warning('win callback key error')
             return
         type = response['type']
         win = 1 if self.chessType == type else 0
@@ -147,6 +148,10 @@ class GamePlayManager(QObject):
         self.isConfirming = False
         self.chessType = -1
         self.emit(SIGNAL("chessResult(int)"), win)
+
+        roomdict = response['room']
+        game_room_manager.GameRoomManager().room = room_model.RoomModel(roomdict)
+        game_room_manager.GameRoomManager().emit(SIGNAL('refreshRoom'))
 
 
 
