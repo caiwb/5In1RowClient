@@ -15,6 +15,14 @@ def singleton(cls, *args, **kw):
 
     return _singleton
 
+#sid
+USER_SERVICE_ID = 1000
+
+#cid
+LOGIN_HANDLER_ID        = 1000
+POST_RANK_HANDLER_ID    = 1001
+CHAT_IN_HALL_HANDLER_ID = 1002
+
 @singleton
 class GameUserManager(QObject):
     def __init__(self):
@@ -29,8 +37,8 @@ class GameUserManager(QObject):
 
     # 登录请求
     def login(self, account):
-        reqData = {'sid': 1000,
-                   'cid': 1000,
+        reqData = {'sid': USER_SERVICE_ID,
+                   'cid': LOGIN_HANDLER_ID,
                    'account': account}
         jsonReq = json.dumps(reqData)
 
@@ -76,8 +84,8 @@ class GameUserManager(QObject):
     def chat(self, text):
         if not self.isLogin:
             return 0
-        reqData = {'sid': 1000,
-                   'cid': 1002,
+        reqData = {'sid': USER_SERVICE_ID,
+                   'cid': CHAT_IN_HALL_HANDLER_ID,
                    'uid': self.currentUser.uid,
                    'text': text}
         jsonReq = json.dumps(reqData)

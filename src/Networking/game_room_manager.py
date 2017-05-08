@@ -17,6 +17,16 @@ def singleton(cls, *args, **kw):
 
     return _singleton
 
+#sid
+ROOM_SERVICE_ID = 1001
+
+#cid
+CREATE_ROOM_HANDLER_ID  = 1000
+POST_LIST_HANDLER_ID    = 1001
+ENTER_ROOM_HANDLER_ID   = 1002
+LEAVE_ROOM_HANDLER_ID   = 1003
+CHAT_IN_ROOM_HANDLER_ID = 1004
+
 @singleton
 class GameRoomManager(QObject):
     def __init__(self):
@@ -36,8 +46,8 @@ class GameRoomManager(QObject):
             return 0
         if self.room:
             return 0
-        reqData = {'sid': 1001,
-                   'cid': 1000,
+        reqData = {'sid': ROOM_SERVICE_ID,
+                   'cid': CREATE_ROOM_HANDLER_ID,
                    'uid': GameUserManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
@@ -63,8 +73,8 @@ class GameRoomManager(QObject):
 
     # 请求房间列表
     def requestRoomList(self):
-        reqData = {'sid': 1001,
-                   'cid': 1001}
+        reqData = {'sid': ROOM_SERVICE_ID,
+                   'cid': POST_LIST_HANDLER_ID}
         jsonReq = json.dumps(reqData)
         self.client.send(jsonReq)
         logging.debug('request room list send' + jsonReq)
@@ -96,8 +106,8 @@ class GameRoomManager(QObject):
             return
         if self.room:
             return
-        reqData = {'sid': 1001,
-                   'cid': 1002,
+        reqData = {'sid': ROOM_SERVICE_ID,
+                   'cid': ENTER_ROOM_HANDLER_ID,
                    'rid': rid,
                    'uid': GameUserManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
@@ -135,8 +145,8 @@ class GameRoomManager(QObject):
             return
         if not self.room:
             return
-        reqData = {'sid': 1001,
-                   'cid': 1003,
+        reqData = {'sid': ROOM_SERVICE_ID,
+                   'cid': LEAVE_ROOM_HANDLER_ID,
                    'rid': self.room.roomId,
                    'uid': GameUserManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
@@ -172,8 +182,8 @@ class GameRoomManager(QObject):
             return 0
         if not self.room:
             return 0
-        reqData = {'sid': 1001,
-                   'cid': 1004,
+        reqData = {'sid': ROOM_SERVICE_ID,
+                   'cid': CHAT_IN_ROOM_HANDLER_ID,
                    'uid': GameUserManager().currentUser.uid,
                    'rid': self.room.roomId,
                    'text': text}

@@ -31,6 +31,13 @@ NONE_CHESS  = 0
 WHITE_CHESS = 1
 BLACK_CHESS = 2
 
+#sid
+CHESS_SERVICE_ID = 1002
+
+#cid
+CHESS_CONFIRM_HANDLER_ID = 1000
+DO_CHESS_HANDLER_ID      = 1001
+
 @singleton
 class GamePlayManager(QObject):
     def __init__(self):
@@ -56,8 +63,8 @@ class GamePlayManager(QObject):
             return 0
 
         self.isConfirming = True
-        reqData = {'sid': 1002,
-                   'cid': 1000,
+        reqData = {'sid': CHESS_SERVICE_ID,
+                   'cid': CHESS_CONFIRM_HANDLER_ID,
                    'uid': GameUserManager().currentUser.uid,
                    'rid': game_room_manager.GameRoomManager().room.roomId,
                    'type': type,
@@ -107,8 +114,8 @@ class GamePlayManager(QObject):
         if self.chessType == -1 or x > 14 or y > 14 or x < 0 or y < 0:
             return 0
 
-        reqData = {'sid': 1002,
-                   'cid': 1001,
+        reqData = {'sid': CHESS_SERVICE_ID,
+                   'cid': DO_CHESS_HANDLER_ID,
                    'uid': GameUserManager().currentUser.uid,
                    'rid': game_room_manager.GameRoomManager().room.roomId,
                    'type': self.chessType,
