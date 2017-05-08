@@ -32,7 +32,7 @@ class GameHallRankList(QListView):
         self.model.clear()
         rank = 0
         for user in login_manager.LoginManager().userScore:
-            if user.has_key('uid') and user.has_key('score'):
+            if 'uid' in user and 'score' in user:
                 text = user['uid'] + ' : ' + str(user['score'])
                 item = QStandardItem(text)
                 item.setTextAlignment(Qt.AlignCenter)

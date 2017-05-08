@@ -53,13 +53,13 @@ class TcpClient(netstream.netstream):
                     data = self.recv()
                     if data:
                         if data == 'hb':
-                            logging.debug("--------recvhb1")
+                            logging.debug("--------recvhb1--------")
                             self.hbTimeoutCount = 0
                             self.hbTimer = time.time()
                             continue
                         logging.debug('recv' + data)
                         response = json.loads(data)
-                        if response.has_key('sid') and response.has_key('cid'):
+                        if 'sid' in response and 'cid' in response:
                             sid = response['sid']
                             cid = response['cid']
                             callbackKey = '%d_%d' % (sid, cid)

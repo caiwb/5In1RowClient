@@ -85,7 +85,7 @@ class GamePlayManager(QObject):
             type = int(response['type'])
             self.isConfirming = False
             # 开始游戏确认
-            if type == CONFIRM_START and response.has_key('chess'):
+            if type == CONFIRM_START and 'chess' in response:
                 self.isStarting = True
                 self.emit(SIGNAL("start"))
                 self.chessType = response['chess']
@@ -93,8 +93,8 @@ class GamePlayManager(QObject):
                     self.isYourTurn = True
                 self.emit(SIGNAL("showTextWithRGB(QString,int,int,int)"),
                           QString(u'双方确认完毕，游戏开始'), 255, 0 ,0)
-            elif type == CONFIRM_REDO and response.has_key('step') and\
-                    response.has_key('chess_type'):
+            elif type == CONFIRM_REDO and 'step' in response and \
+                    'chess_type' in response:
                 stepCount = response['step']
                 self.isYourTurn = True if \
                     response['chess_type'] == self.chessType else False
