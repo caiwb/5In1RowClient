@@ -3,7 +3,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from src.Networking import game_room_manager
-from src.Networking import login_manager
+from src.Networking import game_user_manager
 
 class GameRoomUserInfo(QFrame):
     def __init__(self, parent=None):
@@ -12,7 +12,7 @@ class GameRoomUserInfo(QFrame):
         self.setStyleSheet("GameRoomUserInfo{background-color: rgba(0, 0, 0, 0)}")
         self.setGeometry(530, 20, 255, 50)
         self.roomManager = game_room_manager.GameRoomManager()
-        self.loginManager = login_manager.LoginManager()
+        self.loginManager = game_user_manager.GameUserManager()
         self.connect(self.roomManager, SIGNAL('refreshRoom'),
                      self.refreshData)
         self.setup()

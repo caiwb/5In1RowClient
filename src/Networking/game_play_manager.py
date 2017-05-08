@@ -3,7 +3,7 @@
 from PyQt4.QtCore import *
 import json, logging
 import game_room_manager
-from login_manager import LoginManager
+from game_user_manager import GameUserManager
 import network_client
 from src.Model import room_model
 
@@ -46,7 +46,7 @@ class GamePlayManager(QObject):
 
     # 操作确认
     def confirm(self, side, type):
-        if not LoginManager().isLogin or not game_room_manager.GameRoomManager().room:
+        if not GameUserManager().isLogin or not game_room_manager.GameRoomManager().room:
             return 0
         if type == CONFIRM_START and self.isStarting:
             return 0
@@ -58,7 +58,7 @@ class GamePlayManager(QObject):
         self.isConfirming = True
         reqData = {'sid': 1002,
                    'cid': 1000,
-                   'uid': LoginManager().currentUser.uid,
+                   'uid': GameUserManager().currentUser.uid,
                    'rid': game_room_manager.GameRoomManager().room.roomId,
                    'type': type,
                    'chess_type': 3 - self.chessType,
@@ -91,7 +91,7 @@ class GamePlayManager(QObject):
                 self.chessType = response['chess']
                 if self.chessType == BLACK_CHESS:
                     self.isYourTurn = True
-                self.emit(SIGNAL("showTextWithRGB(QString,int,int,int)"),
+                self.emit(SIGNAL("showRoomTextWithRGB(QString,int,int,int)"),
                           QString(u'双方确认完毕，游戏开始'), 255, 0 ,0)
             elif type == CONFIRM_REDO and 'step' in response and \
                     'chess_type' in response:
@@ -102,14 +102,14 @@ class GamePlayManager(QObject):
 
     #下棋
     def chess(self, x, y):
-        if not LoginManager().isLogin or not game_room_manager.GameRoomManager().room:
+        if not GameUserManager().isLogin or not game_room_manager.GameRoomManager().room:
             return 0
         if self.chessType == -1 or x > 14 or y > 14 or x < 0 or y < 0:
             return 0
 
         reqData = {'sid': 1002,
                    'cid': 1001,
-                   'uid': LoginManager().currentUser.uid,
+                   'uid': GameUserManager().currentUser.uid,
                    'rid': game_room_manager.GameRoomManager().room.roomId,
                    'type': self.chessType,
                    'x': x,
@@ -151,14 +151,9 @@ class GamePlayManager(QObject):
         self.chessType = -1
         self.emit(SIGNAL("chessResult(int)"), win)
 
-        self.emit(SIGNAL("showTextWithRGB(QString,int,int,int)"),
+        self.emit(SIGNAL("showRoomTextWithRGB(QString,int,int,int)"),
                   QString(u'游戏结束'), 255, 0, 0)
 
         roomdict = response['room']
         game_room_manager.GameRoomManager().room = room_model.RoomModel(roomdict)
         game_room_manager.GameRoomManager().emit(SIGNAL('refreshRoom'))
-
-
-
-
-

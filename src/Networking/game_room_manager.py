@@ -3,7 +3,7 @@
 from PyQt4.QtCore import *
 import json, logging
 from src.Networking import network_client
-from src.Networking.login_manager import LoginManager
+from src.Networking.game_user_manager import GameUserManager
 from src.Networking.game_play_manager import GamePlayManager
 from src.Model.room_model import RoomModel
 
@@ -32,13 +32,13 @@ class GameRoomManager(QObject):
 
     # 创建房间
     def createRoom(self):
-        if not LoginManager().isLogin:
+        if not GameUserManager().isLogin:
             return 0
         if self.room:
             return 0
         reqData = {'sid': 1001,
                    'cid': 1000,
-                   'uid': LoginManager().currentUser.uid}
+                   'uid': GameUserManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
         callbackKey = '1001_1000'
@@ -90,7 +90,7 @@ class GameRoomManager(QObject):
 
     # 进入房间
     def enterRoom(self, rid):
-        if not LoginManager().isLogin:
+        if not GameUserManager().isLogin:
             return
         if not rid:
             return
@@ -99,7 +99,7 @@ class GameRoomManager(QObject):
         reqData = {'sid': 1001,
                    'cid': 1002,
                    'rid': rid,
-                   'uid': LoginManager().currentUser.uid}
+                   'uid': GameUserManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
         self.client.send(jsonReq)
@@ -131,14 +131,14 @@ class GameRoomManager(QObject):
 
     # 退出房间
     def leaveRoom(self):
-        if not LoginManager().isLogin:
+        if not GameUserManager().isLogin:
             return
         if not self.room:
             return
         reqData = {'sid': 1001,
                    'cid': 1003,
                    'rid': self.room.roomId,
-                   'uid': LoginManager().currentUser.uid}
+                   'uid': GameUserManager().currentUser.uid}
         jsonReq = json.dumps(reqData)
 
         self.client.send(jsonReq)
@@ -157,7 +157,7 @@ class GameRoomManager(QObject):
             return
         if response['result']:
             logging.debug('leave room suc')
-            if response['uid'] == LoginManager().currentUser.uid:
+            if response['uid'] == GameUserManager().currentUser.uid:
                 self.room = None
                 GamePlayManager().isYourTurn = False
                 GamePlayManager().isStarting = False
@@ -168,18 +168,18 @@ class GameRoomManager(QObject):
 
     # 聊天请求
     def chat(self, text):
-        if not LoginManager().isLogin:
+        if not GameUserManager().isLogin:
             return 0
         if not self.room:
             return 0
         reqData = {'sid': 1001,
                    'cid': 1004,
-                   'uid': LoginManager().currentUser.uid,
+                   'uid': GameUserManager().currentUser.uid,
                    'rid': self.room.roomId,
                    'text': text}
         jsonReq = json.dumps(reqData)
         self.client.send(jsonReq)
-        logging.debug('chat text send' + jsonReq)
+        logging.debug('room chat text send' + jsonReq)
 
     def registChatCallback(self):
         callbackKey = '1001_1004'
@@ -191,5 +191,5 @@ class GameRoomManager(QObject):
             logging.warning('chat callback key error')
             return
         text = response['uid'] + ': ' + response['text']
-        self.emit(SIGNAL("showTextWithRGB(QString,int,int,int)"),
+        self.emit(SIGNAL("showRoomTextWithRGB(QString,int,int,int)"),
                   text, 0, 0, 0)

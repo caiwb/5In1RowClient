@@ -5,11 +5,9 @@ from PyQt4.QtCore import *
 from src.Networking import game_play_manager
 from src.Networking import game_room_manager
 
-class GameRoomChatView(QListView):
+class GameChatView(QListView):
     def __init__(self, parent=None):
         QListView.__init__(self, parent)
-        # self.setStyleSheet("GameRoomChatView{background-color: rgba(0, 0, 0, 100)}")
-        self.setGeometry(530, 200, 255, 260)
 
         self.model = QStandardItemModel()
         self.setModel(self.model)
@@ -22,17 +20,6 @@ class GameRoomChatView(QListView):
         self.setSelectionMode(QAbstractItemView.NoSelection)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setAcceptDrops(True)
-
-        self.connect(game_room_manager.GameRoomManager(),
-                     SIGNAL("showTextWithRGB(QString,int,int,int)"),
-                     self.showText)
-        self.connect(game_play_manager.GamePlayManager(),
-                     SIGNAL("showTextWithRGB(QString,int,int,int)"),
-                     self.showText)
-        self.connect(game_room_manager.GameRoomManager(),
-                     SIGNAL("clearChat"), self.clear)
-        self.connect(game_play_manager.GamePlayManager(),
-                     SIGNAL("clearChat"), self.clear)
 
     def showText(self, text, r=0, g=0, b=0):
         color = QBrush(QColor(r, g, b))

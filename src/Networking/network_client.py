@@ -5,7 +5,7 @@ from lib import netstream
 import time
 import logging
 import json
-from src.Networking import login_manager
+from src.Networking import game_user_manager
 from PyQt4.QtCore import *
 
 def singleton(cls, *args, **kw):
@@ -53,7 +53,7 @@ class TcpClient(netstream.netstream):
                     data = self.recv()
                     if data:
                         if data == 'hb':
-                            logging.debug("--------recvhb1--------")
+                            logging.debug("--------recvhb--------")
                             self.hbTimeoutCount = 0
                             self.hbTimer = time.time()
                             continue
@@ -70,7 +70,7 @@ class TcpClient(netstream.netstream):
                                 logging.warning('callback err ' + callbackKey)
 
             elif self.status() == netstream.NET_STATE_STOP:
-                login_manager.LoginManager().emit(SIGNAL("showLogin"))
+                game_user_manager.GameUserManager().emit(SIGNAL("showLogin"))
 
     def hbLoop(self):
         while True:
@@ -80,5 +80,5 @@ class TcpClient(netstream.netstream):
                 self.hbTimer = t
             if self.hbTimeoutCount > 3:
                 self.close()
-                login_manager.LoginManager().emit(SIGNAL("showLogin"))
+                game_user_manager.GameUserManager().emit(SIGNAL("showLogin"))
                 break

@@ -10,7 +10,7 @@ from src.Common import game_topbar_frame
 from src.Networking import game_room_manager
 from src.GameRoom import game_room_widget
 from src.Common import login_dialog
-from src.Networking import login_manager
+from src.Networking import game_user_manager
 from src.Networking import network_client
 
 try:
@@ -32,7 +32,7 @@ class GameHallMainWindow(QWidget):
 
         # network manager
         self.client = network_client.TcpClient()
-        self.loginManager = login_manager.LoginManager()
+        self.loginManager = game_user_manager.GameUserManager()
         self.gameRoomManager = game_room_manager.GameRoomManager()
         self.connect(self.loginManager, SIGNAL("loginCallback(int, int)"),
                      self.loginCallback)

@@ -2,7 +2,7 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from src.Networking import login_manager
+from src.Networking import game_user_manager
 
 class GameHallRankList(QListView):
     def __init__(self, parent=None):
@@ -25,13 +25,13 @@ class GameHallRankList(QListView):
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setAcceptDrops(True)
 
-        self.connect(login_manager.LoginManager(), SIGNAL("refreshRank"),
+        self.connect(game_user_manager.GameUserManager(), SIGNAL("refreshRank"),
                      self.refresh)
 
     def refresh(self):
         self.model.clear()
         rank = 0
-        for user in login_manager.LoginManager().userScore:
+        for user in game_user_manager.GameUserManager().userScore:
             if 'uid' in user and 'score' in user:
                 text = user['uid'] + ' : ' + str(user['score'])
                 item = QStandardItem(text)

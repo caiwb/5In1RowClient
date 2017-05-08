@@ -16,7 +16,7 @@ def singleton(cls, *args, **kw):
     return _singleton
 
 @singleton
-class LoginManager(QObject):
+class GameUserManager(QObject):
     def __init__(self):
         QObject.__init__(self)
         self.client = network_client.TcpClient()
@@ -24,9 +24,10 @@ class LoginManager(QObject):
         self.isLogin
         self.userScore = []
 
-        callbackKey = '1000_1001'
-        self.client.callbacksDict[callbackKey] = self.rankCallback
+        self.registRankCallback()
+        self.registChatCallback()
 
+    # 登录请求
     def login(self, account):
         reqData = {'sid': 1000,
                    'cid': 1000,
@@ -57,6 +58,7 @@ class LoginManager(QObject):
     def isLogin(self):
         return True if self.currentUser else False
 
+    # 排行榜
     def rankCallback(self, response, data):
         allKeys = ['users']
         if [False for key in allKeys if key not in response.keys()]:
@@ -65,3 +67,32 @@ class LoginManager(QObject):
         self.userScore = response['users']
         self.userScore.sort(key=lambda obj: obj.get('score'), reverse=True)
         self.emit(SIGNAL("refreshRank"))
+
+    def registRankCallback(self):
+        callbackKey = '1000_1001'
+        self.client.callbacksDict[callbackKey] = self.rankCallback
+
+    # 聊天请求
+    def chat(self, text):
+        if not self.isLogin:
+            return 0
+        reqData = {'sid': 1000,
+                   'cid': 1002,
+                   'uid': self.currentUser.uid,
+                   'text': text}
+        jsonReq = json.dumps(reqData)
+        self.client.send(jsonReq)
+        logging.debug('hall chat text send' + jsonReq)
+
+    def registChatCallback(self):
+        callbackKey = '1000_1002'
+        self.client.callbacksDict[callbackKey] = self.chatCallback
+
+    def chatCallback(self, response, data):
+        allKeys = ['text', 'uid']
+        if [False for key in allKeys if key not in response.keys()]:
+            logging.warning('chat callback key error')
+            return
+        text = response['uid'] + ': ' + response['text']
+        self.emit(SIGNAL("showHallTextWithRGB(QString,int,int,int)"),
+                  text, 0, 0, 0)
