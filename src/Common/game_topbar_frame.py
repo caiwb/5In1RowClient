@@ -2,6 +2,7 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from res import images_rc
 
 class GameTopBar(QFrame):
     def __init__(self, parent, eventer):
@@ -10,7 +11,7 @@ class GameTopBar(QFrame):
         self.eventer = eventer
         self.setStyleSheet(
         '''
-        border-image: url(res/bgColor.png);
+        border-image: url(:bgColor);
         background-repeat: no-repeat;
         ''')
         self.isDraging = False
@@ -24,15 +25,15 @@ class GameTopBar(QFrame):
         btn.setStyleSheet(
             '''
             QPushButton#btnSpecial {
-            border-image: url(res/robot_1.png);
+            border-image: url(:robot_1);
             background-repeat: no-repeat;
             }
             QPushButton#btnSpecial:hover {
-            border-image: url(res/robot_2.png);
+            border-image: url(:robot_2);
             background-repeat: no-repeat;
             }
             QPushButton#btnSpecial:pressed {
-            border-image: url(res/robot_3.png);
+            border-image: url(:robot_3);
             background-repeat: no-repeat;
             }
             ''')
@@ -40,12 +41,12 @@ class GameTopBar(QFrame):
 
     def __addButtons(self, parent):
         closeButton = PushButton(parent)
-        closeButton.loadPixmap('res/close.png')
+        closeButton.loadPixmap(':close')
         closeButton.setGeometry(770, 10, 16, 16)
         closeButton.clicked.connect(self.parent.close)
 
         miniButton = PushButton(parent)
-        miniButton.loadPixmap('res/mini.png')
+        miniButton.loadPixmap(':mini')
         miniButton.setGeometry(740, 10, 16, 16)
         miniButton.clicked.connect(self.eventer.showMinimized)
 

@@ -2,16 +2,14 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_play_manager
-import game_room_manager
-import login_manager
+from src.Networking import login_manager
 
 class GameHallRankList(QListView):
     def __init__(self, parent=None):
         QListView.__init__(self, parent)
         self.setStyleSheet(
             '''
-            border-image: url(res/btn_bg.png);
+            border-image: url(:btn_bg);
             background-repeat: no-repeat;
             ''')
 

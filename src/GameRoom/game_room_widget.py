@@ -2,10 +2,10 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_room_main_frame
-import game_topbar_frame
-import game_room_manager
-import game_play_manager
+from src.GameRoom import game_room_main_frame
+from src.Common import game_topbar_frame
+from src.Networking import game_room_manager
+from src.Networking import game_play_manager
 import game_room_result_frame
 
 #confirm type

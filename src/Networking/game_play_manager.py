@@ -5,7 +5,7 @@ import json, logging
 import game_room_manager
 from login_manager import LoginManager
 import network_client
-import room_model
+from src.Model import room_model
 
 def singleton(cls, *args, **kw):
     instances = {}

@@ -2,9 +2,8 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_hall_room_button
-from game_room_manager import GameRoomManager
-import copy
+from src.GameHall import game_hall_room_button
+from src.Networking.game_room_manager import GameRoomManager
 
 class GameHallRoomGird(QFrame):
     def __init__(self, parent=None):
@@ -39,11 +38,11 @@ class GameHallRoomGird(QFrame):
         self.addBtn.setStyleSheet(
         '''
         QPushButton#btnSpecial {
-        border-image: url(res/add_bg.png);
+        border-image: url(:add_bg);
         background-repeat: no-repeat;
         }
         QPushButton#btnSpecial:pressed {
-        border-image: url(res/add_pressed_bg.png);
+        border-image: url(:add_pressed_bg);
         background-repeat: no-repeat;
         }
         ''')

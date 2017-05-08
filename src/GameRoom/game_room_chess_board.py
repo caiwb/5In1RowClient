@@ -1,10 +1,8 @@
 # -*- encoding:utf-8 -*-
 
-import sip, copy
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_play_manager
-import logging
+from src.Networking import game_play_manager
 
 #chess
 NONE_CHESS  = 0
@@ -18,7 +16,7 @@ class ChessBoard(QFrame):
         self.setStyleSheet(
             '''
             ChessBoard{
-            border-image: url(res/chessboard.png);
+            border-image: url(:chessboard);
             background-repeat: no-repeat;
             }
             ''')
@@ -41,12 +39,12 @@ class ChessBoard(QFrame):
         self.chessView = QFrame(self)
         if type == WHITE_CHESS:
             self.chessView.setStyleSheet('''
-                border-image: url(res/white.png);
+                border-image: url(:white);
                 background-repeat: no-repeat;
                 ''')
         elif type == BLACK_CHESS:
             self.chessView.setStyleSheet('''
-                border-image: url(res/black.png);
+                border-image: url(:black);
                 background-repeat: no-repeat;
                 ''')
         self.chessView.setGeometry(drawX, drawY, 30, 30)

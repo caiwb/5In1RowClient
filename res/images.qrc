@@ -1,0 +1,30 @@
+<RCC>
+    <qresource>
+        <file alias="add_bg">add_bg.png</file>
+        <file alias="add_pressed_bg">add_pressed_bg.png</file>
+        <file alias="background">background.jpg</file>
+        <file alias="bgColor">bgColor.png</file>
+        <file alias="black">black.png</file>
+        <file alias="black_before">black_before.png</file>
+        <file alias="board">board.png</file>
+        <file alias="box">box.png</file>
+        <file alias="btn_bg">btn_bg.png</file>
+        <file alias="btn_pressed_bg">btn_pressed_bg.png</file>
+        <file alias="chess_btn">chess_btn.png</file>
+        <file alias="chess_btn_press">chess_btn_press.png</file>
+        <file alias="chessboard">chessboard.png</file>
+        <file alias="close">close.png</file>
+        <file alias="desk">desk.png</file>
+        <file alias="loading">loading.gif</file>
+        <file alias="lose">lose.png</file>
+        <file alias="mini">mini.png</file>
+        <file alias="no_user">no_user.png</file>
+        <file alias="robot_1">robot_1.png</file>
+        <file alias="robot_2">robot_2.png</file>
+        <file alias="robot_3">robot_3.png</file>
+        <file alias="user">user.png</file>
+        <file alias="white">white.png</file>
+        <file alias="white_before">white_before.png</file>
+        <file alias="win">win.jpg</file>
+    </qresource>
+</RCC>

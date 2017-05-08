@@ -5,13 +5,13 @@ import logging
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import game_hall_main_frame
-import game_topbar_frame
-import game_room_manager
-import game_room_widget
-import login_dialog
-import login_manager
-import network_client
+from src.GameHall import game_hall_main_frame
+from src.Common import game_topbar_frame
+from src.Networking import game_room_manager
+from src.GameRoom import game_room_widget
+from src.Common import login_dialog
+from src.Networking import login_manager
+from src.Networking import network_client
 
 try:
     _fromUtf8 = QString.fromUtf8

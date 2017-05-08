@@ -2,8 +2,8 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_room_manager
-import login_manager
+from src.Networking import game_room_manager
+from src.Networking import login_manager
 
 class GameRoomUserInfo(QFrame):
     def __init__(self, parent=None):

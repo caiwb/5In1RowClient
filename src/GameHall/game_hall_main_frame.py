@@ -2,8 +2,8 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_hall_room_gird
-import game_hall_rank_list
+from src.GameHall import game_hall_room_gird
+from src.GameHall import game_hall_rank_list
 
 try:
     _fromUtf8 = QString.fromUtf8
@@ -24,7 +24,7 @@ class GameHallMain(QFrame):
         self.setStyleSheet(
         '''
         GameHallMain{
-        border-image: url(res/background.jpg);
+        border-image: url(:background);
         background-repeat: no-repeat;
         }
         ''')

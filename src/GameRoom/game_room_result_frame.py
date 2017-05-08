@@ -12,7 +12,7 @@ class GameRoomResultFrame(QFrame):
             self.setStyleSheet(
             '''
             GameRoomResultFrame{
-            border-image: url(res/win.jpg);
+            border-image: url(:win);
             background-repeat: no-repeat;
             }
             ''')
@@ -20,7 +20,7 @@ class GameRoomResultFrame(QFrame):
             self.setStyleSheet(
             '''
             GameRoomResultFrame{
-            border-image: url(res/lose.png);
+            border-image: url(:lose);
             background-repeat: no-repeat;
             }
             ''')

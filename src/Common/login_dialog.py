@@ -25,7 +25,7 @@ class LoginDialog(QDialog):
         self.setWindowTitle(title)
         self.setMaximumSize(400, 300)
         self.setMinimumSize(400, 300)
-        self.setWindowIcon(QIcon('res/black.png'))
+        self.setWindowIcon(QIcon(':black'))
         self.setGeometry((desktopSize.width() - 400) / 2,
                          (desktopSize.height() - 300) / 2 + 50, 400, 300)
 

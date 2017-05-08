@@ -2,10 +2,10 @@
 
 from PyQt4.QtCore import *
 import json, logging
-import network_client
-from login_manager import LoginManager
-from game_play_manager import GamePlayManager
-from room_model import RoomModel
+from src.Networking import network_client
+from src.Networking.login_manager import LoginManager
+from src.Networking.game_play_manager import GamePlayManager
+from src.Model.room_model import RoomModel
 
 def singleton(cls, *args, **kw):
     instances = {}

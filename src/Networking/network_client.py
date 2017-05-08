@@ -1,11 +1,11 @@
 #-*- encoding: UTF-8 -*-
 
 import threading
-import netstream
+from lib import netstream
 import time
 import logging
 import json
-import login_manager
+from src.Networking import login_manager
 from PyQt4.QtCore import *
 
 def singleton(cls, *args, **kw):

@@ -2,13 +2,13 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_room_chess_board
-import game_room_user_info
-import game_room_btns_frame
-import game_play_manager
-import game_room_result_frame
-import game_room_chat_view
-import game_room_chat_tool_bar
+from src.GameRoom import game_room_chess_board
+from src.GameRoom import game_room_user_info
+from src.GameRoom import game_room_btns_frame
+from src.Networking import game_play_manager
+from src.GameRoom import game_room_result_frame
+from src.GameRoom import game_room_chat_view
+from src.GameRoom import game_room_chat_tool_bar
 
 class GameRoomMain(QFrame):
     def __init__(self, parent=None):
@@ -17,7 +17,7 @@ class GameRoomMain(QFrame):
         self.setStyleSheet(
         '''
         GameRoomMain{
-        border-image: url(res/background.jpg);
+        border-image: url(:background);
         background-repeat: no-repeat;
         }
         ''')

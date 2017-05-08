@@ -1,10 +1,8 @@
 # -*- encoding:utf-8 -*-
 
 from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-import game_room_manager
-import login_manager
-import game_play_manager
+from src.Networking import game_room_manager
+from src.Networking import game_play_manager
 
 #confirm type
 CONFIRM_START   = 0
@@ -32,11 +30,11 @@ class GameRoomBtnsFrame(QFrame):
         self.startBtn.setStyleSheet(
         '''
         QPushButton#btnSpecial {
-        border-image: url(res/chess_btn.png);
+        border-image: url(:chess_btn);
         background-repeat: no-repeat;
         }
         QPushButton#btnSpecial:pressed {
-        border-image: url(res/chess_btn_press.png);
+        border-image: url(:chess_btn_press);
         background-repeat: no-repeat;
         }
         ''')
@@ -49,11 +47,11 @@ class GameRoomBtnsFrame(QFrame):
         self.redoBtn.setStyleSheet(
         '''
         QPushButton#btnSpecial {
-        border-image: url(res/chess_btn.png);
+        border-image: url(:chess_btn);
         background-repeat: no-repeat;
         }
         QPushButton#btnSpecial:pressed {
-        border-image: url(res/chess_btn_press.png);
+        border-image: url(:chess_btn_press);
         background-repeat: no-repeat;
         }
         ''')
@@ -66,11 +64,11 @@ class GameRoomBtnsFrame(QFrame):
         self.giveupBtn.setStyleSheet(
         '''
         QPushButton#btnSpecial {
-        border-image: url(res/chess_btn.png);
+        border-image: url(:chess_btn);
         background-repeat: no-repeat;
         }
         QPushButton#btnSpecial:pressed {
-        border-image: url(res/chess_btn_press.png);
+        border-image: url(:chess_btn_press);
         background-repeat: no-repeat;
         }
         ''')

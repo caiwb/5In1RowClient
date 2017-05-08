@@ -1,6 +1,6 @@
 # -*- encoding: UTF-8 -*-
 
-from user_model import UserModel
+from src.Model.user_model import UserModel
 
 class RoomModel(object):
     def __init__(self, dict):

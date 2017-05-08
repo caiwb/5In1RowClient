@@ -2,9 +2,8 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-import game_play_manager
-import game_room_manager
-import login_manager
+from src.Networking import game_play_manager
+from src.Networking import game_room_manager
 
 class GameRoomChatView(QListView):
     def __init__(self, parent=None):

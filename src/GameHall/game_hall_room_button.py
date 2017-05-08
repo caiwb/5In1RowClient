@@ -1,8 +1,7 @@
 # -*- encoding:utf-8 -*-
 
 from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-import game_room_manager
+from src.Networking import game_room_manager
 
 class GameHallRoomButton(QPushButton):
     def __init__(self, room, parent=None):
@@ -12,11 +11,11 @@ class GameHallRoomButton(QPushButton):
         self.setStyleSheet(
         '''
         GameHallRoomButton#btnSpecial {
-        border-image: url(res/btn_bg.png);
+        border-image: url(:btn_bg);
         background-repeat: no-repeat;
         }
         GameHallRoomButton#btnSpecial:pressed {
-        border-image: url(res/btn_pressed_bg.png);
+        border-image: url(:btn_pressed_bg);
         background-repeat: no-repeat;
         }
         ''')
@@ -25,7 +24,7 @@ class GameHallRoomButton(QPushButton):
         self.userLbl1 = QLabel(self)
         self.userLbl1.setStyleSheet(
         '''
-        border-image: url(res/no_user.png);
+        border-image: url(:no_user);
         background-repeat: no-repeat;
         ''')
         self.userLbl1.setGeometry(0, 40, 30, 30)
@@ -33,7 +32,7 @@ class GameHallRoomButton(QPushButton):
         self.tableLbl = QLabel(self)
         self.tableLbl.setStyleSheet(
         '''
-        border-image: url(res/desk.png);
+        border-image: url(:desk);
         background-repeat: no-repeat;
         ''')
         self.tableLbl.setGeometry(30, 40, 60, 60)
@@ -41,7 +40,7 @@ class GameHallRoomButton(QPushButton):
         self.userLbl2 = QLabel(self)
         self.userLbl2.setStyleSheet(
         '''
-        border-image: url(res/no_user.png);
+        border-image: url(:no_user);
         background-repeat: no-repeat;
         ''')
         self.userLbl2.setGeometry(90, 40, 30, 30)
@@ -50,34 +49,34 @@ class GameHallRoomButton(QPushButton):
         if not count:
             self.userLbl1.setStyleSheet(
             '''
-            border-image: url(res/no_user.png);
+            border-image: url(:no_user);
             background-repeat: no-repeat;
             ''')
             self.userLbl2.setStyleSheet(
             '''
-            border-image: url(res/no_user.png);
+            border-image: url(:no_user);
             background-repeat: no-repeat;
             ''')
         elif count == 1:
             self.userLbl1.setStyleSheet(
             '''
-            border-image: url(res/user.png);
+            border-image: url(:user);
             background-repeat: no-repeat;
             ''')
             self.userLbl2.setStyleSheet(
             '''
-            border-image: url(res/no_user.png);
+            border-image: url(:no_user);
             background-repeat: no-repeat;
             ''')
         elif count == 2:
             self.userLbl1.setStyleSheet(
             '''
-            border-image: url(res/user.png);
+            border-image: url(:user);
             background-repeat: no-repeat;
             ''')
             self.userLbl2.setStyleSheet(
             '''
-            border-image: url(res/user.png);
+            border-image: url(:user);
             background-repeat: no-repeat;
             ''')
 

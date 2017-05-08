@@ -2,12 +2,14 @@
 
 from PyQt4 import QtGui
 
-import game_hall_widget
+import os
 import sys
 import logging
+from src.GameHall import game_hall_widget
 
 if __name__ == "__main__":
-
+    path = os.path.join(os.getcwd(), "res")
+    sys.path.append(path)
 
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s - %(filename)s[line:%(lineno)d] '
