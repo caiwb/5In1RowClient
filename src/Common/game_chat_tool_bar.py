@@ -33,7 +33,7 @@ class GameChatToolBar(QFrame):
 
     def sendText(self):
         self.parent().sendText(str(_toUtf8(self.textEdit.text())))
-        # self.emit(SIGNAL('sendText(QString)'), self.textEdit.text())
+        self.textEdit.clear()
 
     def updateLayout(self):
         width = (self.width() - 5) / 5

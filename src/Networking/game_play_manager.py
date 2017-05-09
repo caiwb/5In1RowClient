@@ -18,9 +18,10 @@ def singleton(cls, *args, **kw):
     return _singleton
 
 #confirm type
-CONFIRM_START   = 0
-CONFIRM_REDO    = 1
-CONFIRM_GIVE_UP = 2
+CONFIRM_START     = 0
+CONFIRM_REDO      = 1
+CONFIRM_GIVE_UP   = 2
+CONFIRM_FORBIDDEN = 3
 
 #confirm side
 CONFIRM_REQUEST  = 0
@@ -47,17 +48,23 @@ class GamePlayManager(QObject):
         self.chessType = -1
         self.isYourTurn = False
         self.isConfirming = False
+        self.isForbidden = False
+
         self.registConfirmCallback()
         self.registChessCallback()
         self.registWinCallback()
 
     # 操作确认
     def confirm(self, side, type):
-        if not GameUserManager().isLogin or not game_room_manager.GameRoomManager().room:
+        if not GameUserManager().isLogin or \
+                not game_room_manager.GameRoomManager().room:
             return 0
         if type == CONFIRM_START and self.isStarting:
             return 0
-        if (type == CONFIRM_REDO or type == CONFIRM_GIVE_UP) and not self.isStarting:
+        if (type == CONFIRM_REDO or type == CONFIRM_GIVE_UP or
+                    type == CONFIRM_FORBIDDEN) and not self.isStarting:
+            return 0
+        if type == CONFIRM_FORBIDDEN and self.isForbidden:
             return 0
         if self.isConfirming:
             return 0
@@ -73,6 +80,7 @@ class GamePlayManager(QObject):
         jsonReq = json.dumps(reqData)
         self.client.send(jsonReq)
         logging.debug('confirm send' + jsonReq)
+        return 1
 
     def registConfirmCallback(self):
         callbackKey = '1002_1000'
@@ -106,13 +114,15 @@ class GamePlayManager(QObject):
                 self.isYourTurn = True if \
                     response['chess_type'] == self.chessType else False
                 self.emit(SIGNAL("redo(int)"), stepCount)
+            elif type == CONFIRM_FORBIDDEN:
+                self.isForbidden = True
 
     #下棋
     def chess(self, x, y):
         if not GameUserManager().isLogin or not game_room_manager.GameRoomManager().room:
-            return 0
+            return
         if self.chessType == -1 or x > 14 or y > 14 or x < 0 or y < 0:
-            return 0
+            return
 
         reqData = {'sid': CHESS_SERVICE_ID,
                    'cid': DO_CHESS_HANDLER_ID,
@@ -155,6 +165,7 @@ class GamePlayManager(QObject):
         self.isStarting = False
         self.isYourTurn = False
         self.isConfirming = False
+        self.isForbidden = False
         self.chessType = -1
         self.emit(SIGNAL("chessResult(int)"), win)
 

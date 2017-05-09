@@ -6,12 +6,12 @@ from src.GameRoom import game_room_main_frame
 from src.Common import game_topbar_frame
 from src.Networking import game_room_manager
 from src.Networking import game_play_manager
-import game_room_result_frame
 
 #confirm type
-CONFIRM_START   = 0
-CONFIRM_REDO    = 1
-CONFIRM_GIVE_UP = 2
+CONFIRM_START     = 0
+CONFIRM_REDO      = 1
+CONFIRM_GIVE_UP   = 2
+CONFIRM_FORBIDDEN = 3
 
 #confirm side
 CONFIRM_REQUEST  = 0
@@ -53,6 +53,8 @@ class GameRoomWidget(QWidget):
             title = u'对方请求悔棋'
         elif type == CONFIRM_GIVE_UP:
             title = u'对方放弃'
+        elif type == CONFIRM_FORBIDDEN:
+            title = u'对方请求开启禁手模式'
         ret = QMessageBox(self).information(None, u'确认',title,
                                             u'确定', u'取消')
         if ret == 0:

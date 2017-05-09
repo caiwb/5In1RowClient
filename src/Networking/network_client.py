@@ -53,9 +53,10 @@ class TcpClient(netstream.netstream):
                     data = self.recv()
                     if data:
                         if data == 'hb':
-                            logging.debug("--------recvhb--------")
+                            logging.debug("--------hb recv--------")
                             self.hbTimeoutCount = 0
                             self.hbTimer = time.time()
+                            self.send('hb')
                             continue
                         logging.debug('recv' + data)
                         response = json.loads(data)
@@ -76,9 +77,11 @@ class TcpClient(netstream.netstream):
         while True:
             t = time.time()
             if t - self.hbTimer > 20:
+                logging.debug('--------hb timeout--------')
                 self.hbTimeoutCount += 1
                 self.hbTimer = t
             if self.hbTimeoutCount > 3:
+                logging.debug('--------hb close--------')
                 self.close()
                 game_user_manager.GameUserManager().emit(SIGNAL("showLogin"))
                 break

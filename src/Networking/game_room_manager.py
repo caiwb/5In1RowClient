@@ -55,6 +55,7 @@ class GameRoomManager(QObject):
         self.client.callbacksDict[callbackKey] = self.createRoomCallback
         self.client.send(jsonReq)
         logging.debug('create room send' + jsonReq)
+        return 1
 
     # 创建房间回调
     def createRoomCallback(self, response, data):
@@ -130,6 +131,7 @@ class GameRoomManager(QObject):
             roomdict = response['room']
             GamePlayManager().isYourTurn = False
             GamePlayManager().isStarting = False
+            GamePlayManager().isForbidden = False
             GamePlayManager().chessType = -1
             logging.debug('enter room suc')
             if not self.room:
@@ -171,6 +173,7 @@ class GameRoomManager(QObject):
                 self.room = None
                 GamePlayManager().isYourTurn = False
                 GamePlayManager().isStarting = False
+                GamePlayManager().isForbidden = False
                 GamePlayManager().chessType = -1
             else:
                 self.room = RoomModel(response['room'])
@@ -179,9 +182,9 @@ class GameRoomManager(QObject):
     # 聊天请求
     def chat(self, text):
         if not GameUserManager().isLogin:
-            return 0
+            return
         if not self.room:
-            return 0
+            return
         reqData = {'sid': ROOM_SERVICE_ID,
                    'cid': CHAT_IN_ROOM_HANDLER_ID,
                    'uid': GameUserManager().currentUser.uid,

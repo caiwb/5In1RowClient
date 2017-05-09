@@ -101,6 +101,6 @@ class GameUserManager(QObject):
         if [False for key in allKeys if key not in response.keys()]:
             logging.warning('chat callback key error')
             return
-        text = response['uid'] + ': ' + response['text']
+        text = '  ' + response['uid'] + ': ' + response['text']
         self.emit(SIGNAL("showHallTextWithRGB(QString,int,int,int)"),
                   text, 0, 0, 0)
